@@ -39,10 +39,40 @@
                         <span class="ml-1">activewear</span></a>
                 </div>
                 <hr>
+                
+                <p class="text-base leading-8 my-5">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
 
-                <dev class="prose prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600">
-  {{ markdown }}
-</dev>
+                <h3 class="text-2xl font-bold my-5">#1. What is Lorem Ipsum?</h3>
+
+                <p class="text-base leading-8 my-5">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+
+                <blockquote class="text-md italic leading-8 my-5 p-5 text-indigo-600 font-semibold">Lorem Ipsum is
+                    simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s</blockquote>
+
+                <p class="text-base leading-8 my-5">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+
 
                 <a href="#"
                     class="text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
@@ -71,10 +101,10 @@
     </div>
 </div>
 </template>
-<script setup>
-const markdown =  "\ngoland \n```language\nidea-\u003e\tGOPROXY=https://goproxy.cn,direct\nshell-\u003e\tgo env -w GOPROXY=https://goproxy.cn\n```\nnpm\n```language\n\n淘宝源-\u003e\tnpm config set registry https://registry.npm.taobao.org\n最新淘宝源-\u003e\tnpm config set registry https://registry.npmmirror.com\nor\nnpm config set registry https://npm.aliyun.com\nnpm config set registry http://mirrors.cloud.tencent.com/npm\nnpm config set registry https://mirrors.huaweicloud.com/repository/npm\n默认源-\u003e npm config set registry https://registry.npmjs.org/\n示例\nnpm install node-red-dashboard@3.6.5 --registry=https://registry.npm.taobao.org\n```language\n\npython \n```language\npython pip\n临时使用\npip install \u003cpackage-name\u003e --index-url https://pypi.tuna.tsinghua.edu.cn/simple\n\n清华大学 TUNA：URL: https://pypi.tuna.tsinghua.edu.cn/simple\n中国科学技术大学：URL: https://pypi.mirrors.ustc.edu.cn/simple\n豆瓣：URL: https://pypi.douban.com/simple\n阿里云：URL: https://mirrors.aliyun.com/pypi/simple/\n腾讯云：URL: https://mirrors.cloud.tencent.com/pypi/simple/\n```\n"
-
+<script>
+ 
 </script>
+
 <style scoped>
  
 </style>
