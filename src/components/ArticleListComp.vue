@@ -51,7 +51,7 @@ export default {
                     date: 'Jun 1, 2024',
                     title: 'Build Your New Idea with Vue 3 Framework.',
                     body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
-                    link: '#',
+                    link: '/articleDetail',
                     readMoreLink: '#',
                     tags: [
                         { name: 'Vue 3', link: '#' },
@@ -63,7 +63,7 @@ export default {
                     date: 'Jul 15, 2024',
                     title: 'Explore the Latest Features of Vue 3',
                     body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    link: '#',
+                    link: '/articleDetail',
                     readMoreLink: '#',
                     tags: [
                         { name: 'Features', link: '#' },
@@ -75,7 +75,7 @@ export default {
                     date: 'Jul 15, 2024',
                     title: 'Explore the Latest Features of Vue 3',
                     body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    link: '#',
+                    link: '/articleDetail',
                     readMoreLink: '#',
                     tags: [
                         { name: 'Features', link: '#' },
@@ -87,7 +87,7 @@ export default {
                     date: 'Jul 15, 2024',
                     title: 'Explore the Latest Features of Vue 3',
                     body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    link: '#',
+                    link: '/articleDetail',
                     readMoreLink: '#',
                     tags: [
                         { name: 'Features', link: '#' },

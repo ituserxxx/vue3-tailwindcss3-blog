@@ -1,9 +1,11 @@
 <template>
-  <div id="app">
+  
     <HeaderComp />
-    <RouterView />
+    <div class="content">
+      <RouterView />
+    </div>
     <FooterComp />
-  </div>
+   
 </template>
 <script>
 import { RouterView } from 'vue-router'
@@ -29,7 +31,7 @@ export default {
 
 /* Ensure FooterComp is fixed at the bottom */
 .FooterComp {
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;

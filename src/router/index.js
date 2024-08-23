@@ -23,6 +23,16 @@ const router = createRouter({
       path: '/leaveMessage',
       name: 'leaveMessage',
       component: () => import('../views/LeaveMessageView.vue')
+    },
+    {
+      path: '/shoot',
+      name: 'shoot',
+      component: () => import('../views/ShootView.vue')
+    },
+    {
+      path: '/articleDetail',
+      name: 'articleDetail',
+      component: () => import('../views/ArticleDetailView.vue')
     }
   ]
 })
