@@ -1,4 +1,6 @@
 # 项目设计初稿
+
+
 ![5b0a4793b6dbb10eee95f7171086d92](https://github.com/user-attachments/assets/76713271-8cfc-40f5-b8b3-0f28594936b3)
 
 # 目录
@@ -15,3 +17,8 @@ deploy 部署目录
 -- docker-compose-env.yml
 ```
 
+blog 前端页面
+![image](https://github.com/user-attachments/assets/0e8903ea-9d61-489e-a40d-f6d290cc3cdd)
+
+小程序数据页面
+![image](https://github.com/user-attachments/assets/947f0511-44c7-4fe6-a728-a073f698bd1e)
