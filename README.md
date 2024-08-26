@@ -1,29 +1,10 @@
-# vue-project
+# 项目设计初稿
+![5b0a4793b6dbb10eee95f7171086d92](https://github.com/user-attachments/assets/76713271-8cfc-40f5-b8b3-0f28594936b3)
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+# 目录
+blog_front  blog 前端
+blog_front_admin 博客后台前端
+project_server
+-- go_server
+-- python_sensor_code
+-- esp32_cam_code
