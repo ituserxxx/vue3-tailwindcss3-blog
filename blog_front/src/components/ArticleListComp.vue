@@ -1,7 +1,7 @@
 <template>
     <div class="ArticleListComp dark:bg-gray-100 dark:text-gray-900">
 
-        <div v-for="article in ViewData.articles" :key="article.id"
+        <div v-for="article in ViewData.articleList" :key="article.id"
             class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center">
                 <span class="font-light text-gray-600">{{ article.date }}</span>
@@ -19,44 +19,44 @@
             </div>
         </div>
         <!-- 页码 -->
-        <PageComp />
+        <PageComp :currPage="ViewData.currPage" :total="ViewData.total"  @pageChanged="handlePageChanged" />
     </div>
 
 </template>
 <script setup>
-
+import { ref, onMounted } from 'vue';
 import PageComp from './PageComp.vue';
+import { articleListApi } from '../api/blog';
 
-const ViewData = {
-    articles: [
-        {
-            id: 1,
-            date: 'Jun 1, 2024',
-            title: 'Build Your New Idea with Vue 3 Framework.',
-            body: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
-        },
-        {
-            id: 2,
-            date: 'Jul 15, 2024',
-            title: 'Explore the Latest Features of Vue 3',
-            body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-        {
-            id: 2,
-            date: 'Jul 15, 2024',
-            title: 'Explore the Latest Features of Vue 3',
-            body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        },
-        {
-            id: 2,
-            date: 'Jul 15, 2024',
-            title: 'Explore the Latest Features of Vue 3',
-            body: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+const ViewData = ref({
+    currPage: 1,
+    total: 10,
+    articleList: []
+});
+const renderArticleList = async () => {
+    try {
+        let data = await articleListApi({
+            page:ViewData.currPage,
+        });
+        data = data.data;
+        if (data.articleList.length > 0) {
+            ViewData.value.articleList = data.articleList
         }
-    ]
-}
+        ViewData.value.total = data.total
 
+    } catch (error) {
+        console.error('Error fetching the list:', error);
+    }
+};
+const handlePageChanged = (newPage) => {
+  console.log('Current page changed to:', newPage);
 
+  ViewData.value.currPage = newPage;
+  renderArticleList()
+};
+onMounted(() => {
+    renderArticleList();
+});
 </script>
 
 <style scoped>

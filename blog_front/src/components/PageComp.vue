@@ -21,6 +21,11 @@
     </div>
 </template>
 <script setup>
+import { defineProps } from 'vue';
+const props = defineProps({
+  currPage: Number, // 或 Number, Object, etc. 根据实际需求
+  total: Number
+});
 
 </script>
 
