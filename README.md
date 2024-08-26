@@ -5,8 +5,12 @@
 ```
 blog_front  blog 前端
 blog_front_admin 博客后台前端
-project_server
--- go_server
--- python_sensor_code
--- esp32_cam_code
+project_server 服务目录
+-- go_api_server 小程序、blog后端服务
+-- python_sensor_code 传感器代码
+-- esp32_cam_code   esp32-cam模块代码
+deploy 部署目录
+-- DockerFile
+-- docker-compose-env.yml
 ```
+
