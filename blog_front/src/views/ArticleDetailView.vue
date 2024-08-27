@@ -59,6 +59,10 @@
 import 'highlight.js/styles/atom-one-light.css'
 import Markdown from 'vue3-markdown-it';
 
+import { useRoute } from 'vue-router';
+import { onMounted } from 'vue';
+
+
 const ViewData = {
     id:1,
     date:"2022-05-06 23:59:59",
@@ -75,6 +79,16 @@ const ViewData = {
         },
     ]
 };
+onMounted(()=>{
+    // 使用 useRoute 获取当前路由信息
+const route = useRoute();
+const articleId = route.params.id; // 从路由参数中获取 id
+if (articleId == undefined){
+    console.log("内容不存在~")
+    return
+}
+console.log(articleId)
+})
 
 </script>
 <style scoped></style>

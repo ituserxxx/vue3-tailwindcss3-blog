@@ -15,16 +15,20 @@
             </div>
 
             <div class="flex justify-between items-center mt-4">
-                <a class="text-blue-500 hover:underline" :href="`/articleDetail/${article.id}`">Read more</a>
+                <router-link :to="`/articleDetail/${article.id}`" class="text-blue-500 hover:underline">
+                    Read more
+                </router-link>
+                <!-- <a class="text-blue-500 hover:underline" :href="`/articleDetail/${article.id}`">Read more</a> -->
             </div>
         </div>
         <!-- 页码 -->
-        <PageComp :currPage="ViewData.currPage" :total="ViewData.total"  @pageChanged="handlePageChanged" />
+        <PageComp :currPage="ViewData.currPage" :total="ViewData.total" />
     </div>
+
 
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import PageComp from './PageComp.vue';
 import { articleListApi } from '../api/blog';
 
@@ -33,27 +37,32 @@ const ViewData = ref({
     total: 10,
     articleList: []
 });
+
 const renderArticleList = async () => {
     try {
         let data = await articleListApi({
-            page:ViewData.currPage,
+            page: ViewData.currPage,
         });
         data = data.data;
         if (data.articleList.length > 0) {
             ViewData.value.articleList = data.articleList
         }
         ViewData.value.total = data.total
-
     } catch (error) {
         console.error('Error fetching the list:', error);
     }
 };
-const handlePageChanged = (newPage) => {
-  console.log('Current page changed to:', newPage);
 
-  ViewData.value.currPage = newPage;
-  renderArticleList()
-};
+// 使用 watch 函数来观察 ViewData 的变化
+watch(
+    () => ViewData.currPage, // 观察 ViewData 的变化
+    (newValue, oldValue) => {
+        console.log('ViewData  oldValue:', oldValue);
+        console.log('ViewData  newValue:', newValue);
+        // 在这里处理 ViewData 的变化
+    },
+    { deep: true } // 深度观察，确保嵌套数据的变化也能被观察到
+);
 onMounted(() => {
     renderArticleList();
 });

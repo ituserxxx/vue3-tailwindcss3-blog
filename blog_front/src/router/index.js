@@ -15,7 +15,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/tag',
+      path: '/tag/:id',
       name: 'tag',
       component: () => import('../views/TagView.vue')
     },
@@ -30,7 +30,7 @@ const router = createRouter({
       component: () => import('../views/ShootView.vue')
     },
     {
-      path: '/articleDetail',
+      path: '/articleDetail/:id',
       name: 'articleDetail',
       component: () => import('../views/ArticleDetailView.vue')
     }
