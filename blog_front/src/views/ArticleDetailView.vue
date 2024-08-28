@@ -53,42 +53,52 @@
             </div>
         </div>
     </div>
+    <ArticleRecommendComp />
 </template>
 
 <script setup>
-import 'highlight.js/styles/atom-one-light.css'
+import { defineProps, ref, onMounted } from 'vue';
+
+import 'highlight.js/styles/panda-syntax-dark.css'
 import Markdown from 'vue3-markdown-it';
+import { articleDetailApi } from '../api/blog';
+import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
 
-import { useRoute } from 'vue-router';
-import { onMounted } from 'vue';
+const props = defineProps({
+    articleId: String,
+});
+const ViewData = ref({
+    id: 0,
+    date: "",
+    view: 0,
+    title: "",
+    content: "",
+    tags: []
+});
+const renderArticleDetail = async () => {
+    try {
+        let data = await articleDetailApi({
+            id: Number(props.articleId),
+        });
+        if (data.code > 0) {
+            console.error('Error fetching the list:');
+            return
+        }
+        data = data.data;
 
-
-const ViewData = {
-    id:1,
-    date:"2022-05-06 23:59:59",
-    view: 312,
-    title:"Portrait Photography In Early Days",
-    content: "\ngoland \n```language\nidea-\u003e\tGOPROXY=https://goproxy.cn,direct\nshell-\u003e\tgo env -w GOPROXY=https://goproxy.cn\n```\nnpm\n```language\n\n淘宝源-\u003e\tnpm config set registry https://registry.npm.taobao.org\n最新淘宝源-\u003e\tnpm config set registry https://registry.npmmirror.com\nor\nnpm config set registry https://npm.aliyun.com\nnpm config set registry http://mirrors.cloud.tencent.com/npm\nnpm config set registry https://mirrors.huaweicloud.com/repository/npm\n默认源-\u003e npm config set registry https://registry.npmjs.org/\n示例\nnpm install node-red-dashboard@3.6.5 --registry=https://registry.npm.taobao.org\n```language\n\npython \n```language\npython pip\n临时使用\npip install \u003cpackage-name\u003e --index-url https://pypi.tuna.tsinghua.edu.cn/simple\n\n清华大学 TUNA：URL: https://pypi.tuna.tsinghua.edu.cn/simple\n中国科学技术大学：URL: https://pypi.mirrors.ustc.edu.cn/simple\n豆瓣：URL: https://pypi.douban.com/simple\n阿里云：URL: https://mirrors.aliyun.com/pypi/simple/\n腾讯云：URL: https://mirrors.cloud.tencent.com/pypi/simple/\n```\n",
-    tags: [
-        {
-            id: 1,
-            name: "Joe"
-        }, {
-            id: 2,
-            name: "Election2020"
-        },
-    ]
+        ViewData.value.id = data.id
+        ViewData.value.date = data.date
+        ViewData.value.view = data.view
+        ViewData.value.title = data.title
+        ViewData.value.content = data.content
+        ViewData.value.tags = data.tags
+    } catch (error) {
+        console.error('Error fetching the list:', error);
+    }
 };
-onMounted(()=>{
-    // 使用 useRoute 获取当前路由信息
-const route = useRoute();
-const articleId = route.params.id; // 从路由参数中获取 id
-if (articleId == undefined){
-    console.log("内容不存在~")
-    return
-}
-console.log(articleId)
-})
+onMounted(() => {
+    renderArticleDetail();
+});
 
 </script>
 <style scoped></style>

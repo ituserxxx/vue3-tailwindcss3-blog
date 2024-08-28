@@ -6,3 +6,15 @@ export function articleDetailApi (data) {
 export function articleListApi (data) {
     return http.post('/article/list',data)
 }
+
+export function tagListApi (data) {
+    return http.post('/tag/list',data)
+}
+
+export function leaveMessageListApi (data) {
+    return http.post('/leaveMessage/list',data)
+}
+
+export function leaveMessageAddApi (data) {
+    return http.post('/leaveMessage/add',data)
+}

@@ -15,9 +15,10 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/tag/:id',
+      path: '/tag/:tagId?',
       name: 'tag',
-      component: () => import('../views/TagView.vue')
+      component: () => import('../views/TagView.vue'),
+      
     },
     {
       path: '/leaveMessage',
@@ -30,9 +31,10 @@ const router = createRouter({
       component: () => import('../views/ShootView.vue')
     },
     {
-      path: '/articleDetail/:id',
+      path: '/articleDetail/:articleId?',
       name: 'articleDetail',
-      component: () => import('../views/ArticleDetailView.vue')
+      component: () => import('../views/ArticleDetailView.vue'),
+      props: true,
     }
   ]
 })

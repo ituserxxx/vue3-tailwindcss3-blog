@@ -26,7 +26,7 @@ request.interceptors.request.use(req => {
 request.interceptors.response.use(
     response => {
         const res = response.data
-        if(res.code !== 20000){
+        if(res.code !== 0){
             // Message({
             //     message: res.msg,
             //     type: 'error',
