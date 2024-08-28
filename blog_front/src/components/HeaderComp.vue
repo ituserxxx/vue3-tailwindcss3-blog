@@ -23,7 +23,8 @@
 
       <div class="lg:flex lg:gap-x-12">
         <a v-for="item in navigation" :key="item.name" :href="item.href"
-          class="font-semibold leading-6 text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300">
+        :class="{'bg-gray-200 dark:bg-gray-700': currentBgColor === item.href, 'font-semibold leading-6 text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300': true}"
+           @click="updatePage(item.href)">
           {{ item.name }}
         </a>
       </div>
@@ -47,10 +48,11 @@
       </div>
     </div>
   </div>
-  
+
 </template>
 
 <script setup>
+import {  ref } from 'vue';
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'LeaveMessage', href: '/leaveMessage' },
@@ -58,6 +60,11 @@ const navigation = [
   { name: 'Shoot', href: '/shoot' },
   { name: 'About', href: '/about' },
 ];
+const currentBgColor = ref(window.location.pathname);
+
+function updatePage(href) {
+  currentBgColor.value = href;
+}
 </script>
 
 <style scoped>
@@ -65,5 +72,11 @@ const navigation = [
 .HeaderComp {
   height: 60px;
   /* Adjust height if needed */
+}
+a.bg-gray-200 {
+  background-color: #e2e8f0; /* Light gray background for selected item */
+}
+a.dark\:bg-gray-700 {
+  background-color: #4a5568; /* Dark gray background for selected item in dark mode */
 }
 </style>

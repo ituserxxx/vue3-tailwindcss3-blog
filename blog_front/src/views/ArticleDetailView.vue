@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <ArticleRecommendComp />
+    <!-- <ArticleRecommendComp /> -->
 </template>
 
 <script setup>

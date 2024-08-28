@@ -18,10 +18,12 @@
 <script setup>
 import ArticleListComp from '../components/ArticleListComp.vue'
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router'; // Import Vue Router hook
+import { useRoute, useRouter } from 'vue-router'; // Import Vue Router hook
 import { tagListApi } from '../api/blog';
 
-const route = useRoute(); // Use Vue Router hook to access route information  
+const route = useRoute();
+const router = useRouter();
+
 const ViewData = ref({
   currentTagId: Number(route.params.tagId),
   tagList: [],
@@ -31,6 +33,8 @@ const ViewData = ref({
 
 function updateCurrentTagId(tagId) {
   ViewData.value.currentTagId = tagId;
+  // 跳转到新的 URL
+  router.push(`/tag/${tagId}`);
 }
 
 const renderTagList = async () => {
