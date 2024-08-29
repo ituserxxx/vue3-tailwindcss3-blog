@@ -7,9 +7,9 @@ const emit = defineEmits(['update:modelValue'])
 
 const authStore = useAuthStore()
 
-function toOtherForm(type: any) {
-  emit('update:modelValue', type)
-}
+// function toOtherForm(type: any) {
+//   emit('update:modelValue', type)
+// }
 
 const { t } = useI18n()
 const rules = computed(() => {
@@ -27,13 +27,17 @@ const rules = computed(() => {
   }
 })
 const formValue = ref({
-  account: 'super',
-  pwd: '123456',
+  account: '',
+  pwd: '',
 })
+// const formValue = ref({
+//   account: 'super',
+//   pwd: '123456',
+// })
 const isRemember = ref(false)
 const isLoading = ref(false)
-
 const formRef = ref<FormInst | null>(null)
+
 function handleLogin() {
   formRef.value?.validate(async (errors) => {
     if (errors)
@@ -42,9 +46,9 @@ function handleLogin() {
     isLoading.value = true
     const { account, pwd } = formValue.value
 
-    if (isRemember.value)
-      local.set('loginAccount', { account, pwd })
-    else local.remove('loginAccount')
+    // if (isRemember.value)
+    //   local.set('loginAccount', { account, pwd })
+    // else local.remove('loginAccount')
 
     await authStore.login(account, pwd)
     isLoading.value = false
@@ -83,28 +87,29 @@ function checkUserAccount() {
         </n-input>
       </n-form-item>
       <n-space vertical :size="20">
-        <div class="flex-y-center justify-between">
+        <!-- <div class="flex-y-center justify-between">
           <n-checkbox v-model:checked="isRemember">
             {{ $t('login.rememberMe') }}
           </n-checkbox>
           <n-button type="primary" text @click="toOtherForm('resetPwd')">
             {{ $t('login.forgotPassword') }}
           </n-button>
-        </div>
+        </div> -->
         <n-button block type="primary" size="large" :loading="isLoading" :disabled="isLoading" @click="handleLogin">
           {{ $t('login.signIn') }}
         </n-button>
-        <n-flex>
+        <!-- <n-flex>
           <n-text>{{ $t('login.noAccountText') }}</n-text>
           <n-button type="primary" text @click="toOtherForm('register')">
             {{ $t('login.signUp') }}
           </n-button>
-        </n-flex>
+        </n-flex> -->
       </n-space>
     </n-form>
-    <n-divider>
+    <!-- <n-divider>
       <span op-80>{{ $t('login.or') }}</span>
-    </n-divider>
+    </n-divider> -->
+<!--     
     <n-space justify="center">
       <n-button circle>
         <template #icon>
@@ -121,7 +126,7 @@ function checkUserAccount() {
           <n-icon><icon-park-outline-github-one /></n-icon>
         </template>
       </n-button>
-    </n-space>
+    </n-space> -->
   </div>
 </template>
 
