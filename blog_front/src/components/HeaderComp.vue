@@ -21,13 +21,14 @@
 
       </div>
 
-      <div class="lg:flex lg:gap-x-12">
+      <div class="lg:flex lg:gap-x-12  ">
         <a v-for="item in navigation" :key="item.name" :href="item.href"
         :class="{'bg-gray-200 dark:bg-gray-700': currentBgColor === item.href, 'font-semibold leading-6 text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300': true}"
            @click="updatePage(item.href)">
           {{ item.name }}
         </a>
       </div>
+       
 
       <div class="w-full max-w-sm min-w-[200px]">
         <div class="relative">
@@ -68,6 +69,7 @@ function updatePage(href) {
 </script>
 
 <style scoped>
+
 /* Add any additional styles here if needed */
 .HeaderComp {
   height: 60px;
@@ -77,6 +79,6 @@ a.bg-gray-200 {
   background-color: #e2e8f0; /* Light gray background for selected item */
 }
 a.dark\:bg-gray-700 {
-  background-color: #4a5568; /* Dark gray background for selected item in dark mode */
+  background-color: #c4cbd9; /* Dark gray background for selected item in dark mode */
 }
 </style>
