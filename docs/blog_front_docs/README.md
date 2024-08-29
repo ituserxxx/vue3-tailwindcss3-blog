@@ -1,3 +1,4 @@
+
 # blog front doc
 
 页面调试可启动 node /project_server/mock.js 进行调试
@@ -21,7 +22,9 @@ response data
     data: data // api data
 }
 ```
-#### blog/article/list
+下面的接口返回的数据都是 data 的值
+
+#### 文章列表 blog/article/list
 
 require
 ```
@@ -47,7 +50,7 @@ response
   }
 ```
 
-#### blog/article/detail
+#### 文章相亲 blog/article/detail
 
 require
 ```
@@ -74,7 +77,7 @@ response
     ]
   }
 ```
-#### blog/tag/list
+#### 标签列表 blog/tag/list
 
 require
 ```
@@ -91,7 +94,7 @@ response
   }
 ```
 
-#### blog/leaveMessage/list
+#### 留言列表 blog/leaveMessage/list
 
 require
 ```
@@ -122,7 +125,7 @@ response
   }
 ```
 
-#### blog/leaveMessage/add
+#### 新增留言 blog/leaveMessage/add
 
 require
 ```
