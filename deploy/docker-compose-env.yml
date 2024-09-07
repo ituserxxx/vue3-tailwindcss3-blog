@@ -1,0 +1,36 @@
+version: '3'
+services:
+  blog_mysql:
+    image: mysql:8.0
+    container_name: blog_mysql_cn
+    restart: on-failure
+    ports:
+      - "9801:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
+      - MYSQL_DATABASE=blog
+      - MYSQL_USER=blog
+      - MYSQL_PASSWORD=blogmima
+      - MYSQL_ROOT_PASSWORD=blogmima
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+
+  blog_mysql_admin:
+    image: phpmyadmin/phpmyadmin
+    container_name: blog_mysql_admin_cn
+    restart: on-failure
+    ports:
+      - "9802:80"
+    environment:
+      - PMA_ARBITRARY=0
+      - MYSQL_USER=blog
+      - MYSQL_PASSWORD=blogmima
+      - MYSQL_ROOT_PASSWORD=blogmima
+      - PMA_HOST=blog_mysql
+    depends_on:
+      - blog_mysql
