@@ -34,7 +34,7 @@
             </template>
             <a-menu-item key="menuAdminAdd">add</a-menu-item>
             <a-menu-item key="menuAdminList">list</a-menu-item>
- \
+            \
           </a-sub-menu>
 
           <a-sub-menu key="sub3">
