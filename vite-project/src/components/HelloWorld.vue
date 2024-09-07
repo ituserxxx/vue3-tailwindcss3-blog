@@ -3,9 +3,9 @@
     <a-layout-header class="header">
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">nav 1</a-menu-item>
+        <!-- <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
-        <a-menu-item key="3">nav 3</a-menu-item>
+        <a-menu-item key="3">nav 3</a-menu-item> -->
       </a-menu>
     </a-layout-header>
     <a-layout>
@@ -13,58 +13,25 @@
         <a-menu v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" mode="inline"
           :style="{ height: '100%', borderRight: 0 }">
 
-          <a-sub-menu key="sub1">
+          <a-sub-menu v-for=" itemMenu in compSubTitle" :key=itemMenu.menuKey>
             <template #title>
               <span>
                 <user-outlined />
-                Article
+                {{ itemMenu.title }}
               </span>
             </template>
-            <a-menu-item key="menuArticleAdd">add</a-menu-item>
-            <a-menu-item key="menuArticleList">list</a-menu-item>
-          </a-sub-menu>
-
-          <a-sub-menu key="sub2">
-            <template #title>
-              <span>
-                <laptop-outlined />
-                Users
-              </span>
-            </template>
-            <a-menu-item key="menuUsersAdd">add</a-menu-item>
-            <a-menu-item key="menuUsersList">list</a-menu-item>
-            \
-          </a-sub-menu>
-
-          <a-sub-menu key="sub3">
-            <template #title>
-              <span>
-                <notification-outlined />
-                Leave Message
-              </span>
-            </template>
-            <a-menu-item key="menuLeaveMessageList">list</a-menu-item>
-          </a-sub-menu>
-
-          <a-sub-menu key="sub4">
-            <template #title>
-              <span>
-                <notification-outlined />
-                Tags
-              </span>
-            </template>
-            <a-menu-item key="menuTagsList">list</a-menu-item>
+            <a-menu-item v-for="sub in itemMenu.sub" :key=sub.k>{{ sub.w }}</a-menu-item>
           </a-sub-menu>
 
         </a-menu>
       </a-layout-sider>
 
       <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
+        <!-- <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>List</a-breadcrumb-item>
           <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
+        </a-breadcrumb> -->
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <component v-if="selectedKeys2.length" :is="compKeyMap[selectedKeys2[0]]" />
         </a-layout-content>
@@ -92,9 +59,56 @@ const compKeyMap = {
   menuLeaveMessageList: LeaveMessageListComp,
   menuTagsList: TagsListComp
 }
-const compSubTitle = {
-  
-}
+const compSubTitle = [
+  {
+    menuKey: "article",
+    title: "Article",
+    sub: [
+      {
+        k: "menuArticleAdd",
+        w: "add"
+      },
+      {
+        k: "menuArticleList",
+        w: "list"
+      }
+    ]
+  },
+  {
+    menuKey: "tag",
+    title: "Tags",
+    sub: [
+      {
+        k: "menuTagsList",
+        w: "list"
+      }
+    ]
+  },
+  {
+    menuKey: "leaveMessage",
+    title: "Leave Message",
+    sub: [
+      {
+        k: "menuLeaveMessageList",
+        w: "list"
+      }
+    ]
+  },
+  {
+    menuKey: "users",
+    title: "Users",
+    sub: [
+      {
+        k: "menuUsersAdd",
+        w: "add"
+      },
+      {
+        k: "menuUsersList",
+        w: "list"
+      }
+    ]
+  },
+]
 
 const selectedKeys2 = ref([]);
 const openKeys = ref([]);

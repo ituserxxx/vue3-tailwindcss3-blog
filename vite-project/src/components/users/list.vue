@@ -18,6 +18,9 @@
         <a-popconfirm v-if="dataSource.length" title="Sure to delete?" @confirm="onDelete(record.key)">
           <a>Delete</a>
         </a-popconfirm>
+        <a-popconfirm v-if="dataSource.length" title="Sure to delete?" @confirm="onDelete(record.key)">
+          <a>Edit</a>
+        </a-popconfirm>
       </template>
     </template>
   </a-table>
