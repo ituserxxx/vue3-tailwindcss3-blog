@@ -25,6 +25,26 @@ http.createServer(function (request, response) {
   })
 
   console.log('请求url->' + request.url)
+   /*------------- blog admin -------------*/
+  if (url === '/admin/user/list') {
+    data = adminUserList()
+  }
+  if (url === '/admin/user/add') {
+    data = adminUserAdd()
+  }
+  if (url === '/admin/user/info') {
+    data = adminUserInfo()
+  }
+  if (url === '/admin/user/update') {
+    data = adminUserUpdate()
+  }
+  if (url === '/admin/user/delte') {
+    data = adminUserDelete()
+  }
+
+
+
+   /*------------- blog front -------------*/
   if (url === '/blog/article/list') {
     data = articleList()
     console.log(data)
@@ -41,6 +61,7 @@ http.createServer(function (request, response) {
   if (url === '/blog/leaveMessage/add') {
     data = leaveMessageAdd()
   }
+
   // 内容类型: text/plain
   response.writeHead(200,
     { 'Content-Type': 'application/json; charset=UTF-8' })
@@ -51,7 +72,48 @@ http.createServer(function (request, response) {
     data: data
   }))
 }).listen(6008)
+/*------------- blog admin -------------*/
+function adminUserList() {
+  return {
+    list : [
+      {
+        id: 1,
+        name: 'xxx0',
+        passwd: 'sssss',
+      },
+      {
+        id: 2,
+        name: 'xxx1',
+        passwd: 'sssss',
+      },
+    ],
+    total :10
+  }
+}
+function adminUserAdd() {
+  return {
+    id:1,
+  }
+}
+function adminUserInfo() {
+  return {
+    id: 1,
+    name: 'xxx0',
+    passwd: 'sssss',
+  }
+}
+function adminUserUpdate() {
+  return {
+    
+  }
+}
+function adminUserDelete() {
+  return {
+    
+  }
+}
 
+/* ---------------- blog front -------------*/
 function leaveMessageAdd() {
   return {
     id: 998,
