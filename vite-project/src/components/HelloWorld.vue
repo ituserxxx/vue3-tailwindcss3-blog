@@ -2,11 +2,11 @@
   <a-layout>
     <a-layout-header class="header">
       <div class="logo" />
-      <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+      <!-- <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }"> -->
         <!-- <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item> -->
-      </a-menu>
+      <!-- </a-menu> -->
     </a-layout-header>
     <a-layout>
       <a-layout-sider width="200" style="background: #fff">
@@ -16,7 +16,7 @@
           <a-sub-menu v-for=" itemMenu in compSubTitle" :key=itemMenu.menuKey>
             <template #title>
               <span>
-                <user-outlined />
+                <!-- <user-outlined /> -->
                 {{ itemMenu.title }}
               </span>
             </template>
@@ -120,7 +120,8 @@ const openKeys = ref([]);
   height: 31px;
   margin: 16px 24px 16px 0;
   background: rgba(255, 255, 255, 0.3);
-
+  background-image: url('../assets/logo.svg');
+  background-size: cover; /* 可选，根据需要调整 */
 }
 
 .ant-row-rtl #components-layout-demo-top-side-2 .logo {

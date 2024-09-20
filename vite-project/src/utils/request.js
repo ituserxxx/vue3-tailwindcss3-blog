@@ -25,6 +25,7 @@ request.interceptors.request.use(req => {
 // 响应拦截
 request.interceptors.response.use(
     response => {
+        // console.log(response)
         const res = response.data
         if(res.code !== 0){
             // Message({
