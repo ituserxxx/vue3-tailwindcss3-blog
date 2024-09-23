@@ -1,5 +1,5 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
+  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="goToAddUser">Add</a-button>
   <a-table :columns="columns" :data-source="dataSource">
     <template #headerCell="{ column }">
       {{ column.title }}
@@ -34,6 +34,9 @@ import { cloneDeep } from 'lodash-es';
 import { ApiUserList } from '../../api/blog.js';
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const goToAddUser = () => {
+  router.push('/usersAdd'); // 跳转到添加用户页面
+};
 const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'name', dataIndex: 'name', },
@@ -56,7 +59,7 @@ const dataSource = ref([
 const Init = async () => {
   renderUserList();
 }
-
+Init()
 const renderUserList = async () => {
   try {
     let data = await ApiUserList({
@@ -67,10 +70,8 @@ const renderUserList = async () => {
     console.error('Error fetching the list:', error);
   }
 };
-const handleAdd = () => {
-  router.push('/usersAdd');
-};
-Init()
+
+
 
 </script>
 

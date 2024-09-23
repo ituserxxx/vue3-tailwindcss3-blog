@@ -22,7 +22,6 @@
             </template>
             <a-menu-item v-for="sub in itemMenu.sub" :key=sub.k>{{ sub.w }}</a-menu-item>
           </a-sub-menu>
-
         </a-menu>
       </a-layout-sider>
 
