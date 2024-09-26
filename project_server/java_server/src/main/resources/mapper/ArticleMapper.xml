@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.blog.mapper.ArticleMapper">
+    <resultMap id="ArticleDetail" type="com.example.blog.dto.ArticleDetailResp">
+        <result property="id" column="id"></result>
+        <result property="date" column="update_time"></result>
+        <result property="view" column="view_sum"></result>
+        <result property="title" column="title"></result>
+        <result property="content" column="content"></result>
+        <collection property="tags" ofType="com.example.blog.Model.Tag">
+            <result property="id" column="t_id"></result>
+            <result property="name" column="t_name"></result>
+            <result property="articleSum" column="a_sum"></result>
+        </collection>
+    </resultMap>
+    <select id="getArticleById" resultMap="ArticleDetail">
+        SELECT a.*,t.id t_id,t.name t_name,t.article_sum a_sum
+        from articles a
+        JOIN article_tag_rela ON a.id=article_tag_rela.article_id
+        JOIN tags t ON t.id=article_tag_rela.tag_id where a.id=#{id}
+    </select>
+    <select id="getArticleListByPageAndTag" parameterType="java.util.Map" resultType="com.example.blog.dto.ArticleListResp">
+        SELECT a.id,a.update_time date,a.title,a.content body
+        from articles a
+        <if test="tagId != null">
+            JOIN article_tag_rela ON a.id=article_tag_rela.article_id and article_tag_rela.tag_id=#{tagId}
+        </if>
+        limit #{offset},10
+    </select>
+    <select id="getArticleCountByTag" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(*)
+        from articles a
+        <if test="tagId != null">
+            JOIN article_tag_rela ON a.id=article_tag_rela.article_id and article_tag_rela.tag_id=#{tagId}
+        </if>
+    </select>
+</mapper>
