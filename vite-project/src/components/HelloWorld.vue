@@ -3,7 +3,7 @@
     <a-layout-header class="header">
       <div class="logo" />
       <!-- <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }"> -->
-        <!-- <a-menu-item key="1">nav 1</a-menu-item>
+      <!-- <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item> -->
       <!-- </a-menu> -->
@@ -41,15 +41,15 @@
   </a-layout>
 </template>
 <script setup>
-import { ref, watch } from 'vue';
-
+import { ref, watch, computed } from 'vue';
+import { useStore } from 'vuex';
 import ArticleAddComp from './article/add.vue'
 import ArticleListComp from './article/list.vue'
 import UsersAddComp from './users/add.vue'
 import UsersListComp from './users/list.vue'
 import LeaveMessageListComp from './leaveMessage/list.vue'
 import TagsListComp from './tags/list.vue'
-
+const store = useStore();
 const compKeyMap = {
   menuArticleAdd: ArticleAddComp,
   menuArticleList: ArticleListComp,
@@ -97,10 +97,10 @@ const compSubTitle = [
     menuKey: "users",
     title: "Users",
     sub: [
-      {
-        k: "menuUsersAdd",
-        w: "add"
-      },
+      // {
+      //   k: "menuUsersAdd",
+      //   w: "add"
+      // },
       {
         k: "menuUsersList",
         w: "list"
@@ -109,8 +109,10 @@ const compSubTitle = [
   },
 ]
 
-const selectedKeys2 = ref([]);
-const openKeys = ref([]);
+const openKeys = ref(["article"]);
+const selectedKeys2 = ref(["menuArticleList"]);
+// const selectedKeys2 = computed(() => [store.state.menu_2]);
+// const openKeys = computed(() => [store.state.menu_1]);
 </script>
 <style scoped>
 #components-layout-demo-top-side-2 .logo {
@@ -120,7 +122,8 @@ const openKeys = ref([]);
   margin: 16px 24px 16px 0;
   background: rgba(255, 255, 255, 0.3);
   background-image: url('../assets/logo.svg');
-  background-size: cover; /* 可选，根据需要调整 */
+  background-size: cover;
+  /* 可选，根据需要调整 */
 }
 
 .ant-row-rtl #components-layout-demo-top-side-2 .logo {

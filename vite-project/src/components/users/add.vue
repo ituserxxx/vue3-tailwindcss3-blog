@@ -9,9 +9,8 @@
       <a-input v-model:value="formState.passwd" />
     </a-form-item>
 
-
-    <a-form-item label="Availability or not" name="isAvailability">
-      <a-switch v-model:checked="formState.delivery" />
+    <a-form-item label="Availability or not" name="status">
+      <a-switch v-model:checked="formState.status" />
     </a-form-item>
 
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -22,6 +21,7 @@
 </template>
 <script setup>
 import { reactive, ref, toRaw } from 'vue';
+import { ApiUserAdd } from '../../api/blog.js';
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -32,7 +32,7 @@ const wrapperCol = {
 const formState = reactive({
   name: '',
   passwd: '',
-  isAvailability: false,
+  status: false,
 });
 const rules = {
   name: [
@@ -65,8 +65,11 @@ const rules = {
 const onSubmit = () => {
   formRef.value
     .validate()
-    .then(() => {
-      console.log('values', formState, toRaw(formState));
+    .then(async () => {
+      // console.log('values', formState, toRaw(formState));
+      let data = await ApiUserAdd(formState);
+      console.log("新增succ ", data.data)
+
     })
     .catch(error => {
       console.log('error', error);

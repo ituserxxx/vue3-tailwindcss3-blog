@@ -3,16 +3,18 @@ import { createStore } from 'vuex';
 const store = createStore({
   state() {
     return {
-      isLoggedIn: false
+      menu_1:"users",
+      menu_2:"menuUsersList",
+      isLoggedIn: false,
     };
   },
   mutations: {
-    login(state) {
-      state.isLoggedIn = true;
+    update_menu_1(state,newVal) {
+      state.menu_1 = newVal;
     },
-    logout(state) {
-      state.isLoggedIn = false;
-    }
+    update_menu_2(state,newVal) {
+      state.menu_2 = newVal;
+    },
   }
 });
 
