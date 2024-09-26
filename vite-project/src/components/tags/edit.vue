@@ -13,15 +13,25 @@
       <a-switch v-model:checked="formState.status" />
     </a-form-item>
 
-    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-      <a-button type="primary" @click="onSubmit">Create</a-button>
-    </a-form-item>
 
+    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+      <a-button type="primary" @click="onSubmit">Commit</a-button>
+    </a-form-item>
+    <span v:model:value="formState.id" hidden></span>
   </a-form>
+ 
+
 </template>
 <script setup>
-import { reactive, ref, toRaw } from 'vue';
-import { ApiUserAdd } from '../../api/blog.js';
+import { reactive, ref, toRaw, defineProps } from 'vue';
+import { message } from 'ant-design-vue';
+import { ApiTagsInfo, ApiTagsUpdate } from '../../api/tags.js';
+const props = defineProps({
+  id: {
+    type: Number, // 或者 String，取决于你的需求
+    required: true,
+  },
+});
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -30,9 +40,9 @@ const wrapperCol = {
   span: 13,
 };
 const formState = reactive({
+  id: props.id,
   name: '',
-  passwd: '',
-  status: false,
+ 
 });
 const rules = {
   name: [
@@ -48,29 +58,30 @@ const rules = {
       trigger: 'blur',
     },
   ],
-  passwd: [
-    {
-      required: true,
-      message: 'Please input Login Password',
-      trigger: 'change',
-    },
-    {
-      min: 6,
-      max: 50,
-      message: 'Length should be than 6 character',
-      trigger: 'blur',
-    },
-  ],
 };
+
+
+const renderTagsInfo = async () => {
+  let data = await ApiTagsInfo({
+    id: props.id
+  });
+  if (data.code === 0) {
+    formState.name = data.data.name
+  } else {
+    message.error(data.data.msg);
+  }
+
+};
+renderTagsInfo();
+
+
 const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      // console.log('values', formState, toRaw(formState));
-      let data = await ApiUserAdd(formState);
-      console.log("新增succ ", data.data)
+      let data = await ApiTagsUpdate(formState);
       if (data.code === 0) {
-        message.success('success');
+        console.log("修改succ ", data.data)
       } else {
         message.error(data.data.msg);
       }
@@ -79,6 +90,7 @@ const onSubmit = () => {
       console.log('error', error);
     });
 };
+
 
 </script>
 

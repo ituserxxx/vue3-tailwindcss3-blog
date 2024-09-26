@@ -25,26 +25,8 @@ http.createServer(function (request, response) {
   })
 
   console.log('请求url->' + request.url)
-   /*------------- blog admin -------------*/
-  if (url === '/admin/user/list') {
-    data = adminUserList()
-  }
-  if (url === '/admin/user/add') {
-    data = adminUserAdd()
-  }
-  if (url === '/admin/user/info') {
-    data = adminUserInfo()
-  }
-  if (url === '/admin/user/update') {
-    data = adminUserUpdate()
-  }
-  if (url === '/admin/user/delte') {
-    data = adminUserDelete()
-  }
-
-
-
-   /*------------- blog front -------------*/
+  
+  /*------------- blog front -------------*/
   if (url === '/blog/article/list') {
     data = articleList()
     console.log(data)
@@ -61,6 +43,40 @@ http.createServer(function (request, response) {
   if (url === '/blog/leaveMessage/add') {
     data = leaveMessageAdd()
   }
+  /*------------- blog admin -----user--------*/
+  if (url === '/admin/user/list') {
+    data = adminUserList()
+  }
+  if (url === '/admin/user/add') {
+    data = adminUserAdd()
+  }
+  if (url === '/admin/user/info') {
+    data = adminUserInfo()
+  }
+  if (url === '/admin/user/update') {
+    data = adminUserUpdate()
+  }
+  if (url === '/admin/user/delte') {
+    data = adminUserDelete()
+  }
+
+/*------------- blog admin ----tags---------*/
+if (url === '/admin/tags/list') {
+  data = adminTagsList()
+}
+if (url === '/admin/tags/add') {
+  data = adminTagsAdd()
+}
+if (url === '/admin/tags/info') {
+  data = adminTagsInfo()
+}
+if (url === '/admin/tags/update') {
+  data = adminTagsUpdate()
+}
+if (url === '/admin/tags/delte') {
+  data = adminTagsDelete()
+}
+
 
   // 内容类型: text/plain
   response.writeHead(200,
@@ -72,27 +88,70 @@ http.createServer(function (request, response) {
     data: data
   }))
 }).listen(6008)
+/*------------- blog tags -------------*/
+function adminTagsList() {
+  return {
+    list: [
+      {
+        id: 1,
+        name: 'vvvvue',
+        num: 1,
+      },
+      {
+        id: 2,
+        name: 'jssssssssss',
+        num: 1,
+      },
+    ],
+    total: 10
+  }
+}
+function adminTagsAdd() {
+  return {
+    id: 1,
+  }
+}
+function adminTagsInfo() {
+  return {
+    id: 1,
+    name: 'vvvvue',
+    num: 1,
+  }
+}
+function adminTagsUpdate() {
+  return {
+
+  }
+}
+function adminTagsDelete() {
+  return {
+
+  }
+}
+
 /*------------- blog admin -------------*/
 function adminUserList() {
   return {
-    list : [
+    list: [
       {
         id: 1,
         name: 'xxx0',
         passwd: 'sssss',
+        status: 1,
       },
       {
         id: 2,
         name: 'xxx1',
         passwd: 'sssss',
+        status: 2,
       },
     ],
-    total :10
+    total: 10
   }
 }
 function adminUserAdd() {
   return {
-    id:1,
+    id: 1,
   }
 }
 function adminUserInfo() {
@@ -100,16 +159,17 @@ function adminUserInfo() {
     id: 1,
     name: 'xxx0',
     passwd: 'sssss',
+    status: 2,
   }
 }
 function adminUserUpdate() {
   return {
-    
+
   }
 }
 function adminUserDelete() {
   return {
-    
+
   }
 }
 

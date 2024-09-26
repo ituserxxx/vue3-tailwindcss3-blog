@@ -1,5 +1,5 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddUser">Add</a-button>
+  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddDrawer">Add</a-button>
 
   <!-- ------------列表------------- -->
   <a-table :columns="columns" :data-source="dataSource">
@@ -24,8 +24,8 @@
       </template>
       <template v-else-if="column.dataIndex === 'operation'">
         <span>
-          <a @click="openEditUser(record.id)">Edit </a>
-          <a @click="openDeleteUser(record.id)">Delete</a>
+          <a @click="openEditDrawer(record.id)">Edit </a>
+          <a @click="openDelete(record.id)">Delete</a>
         </span>
       </template>
     </template>
@@ -35,13 +35,13 @@
   <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
     :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add User" placement="right"
     @close="closeAddComp" :destroyOnClose="true">
-    <UsersAddComp />
+    <AddComp />
   </a-drawer>
   <!-- ------------修改抽屉------------- -->
   <a-drawer v-model:open="openEdit" class="custom-class" root-class-name="root-class-name"
     :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Edit User" placement="right"
     @close="closeEditComp" :destroyOnClose="true">
-    <UsersEditComp :id="currUpdateID" />
+    <EditComp :id="currUpdateID" />
   </a-drawer>
 
 </template>
@@ -49,12 +49,11 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 import { message } from 'ant-design-vue';
-import { cloneDeep } from 'lodash-es';
 import { ApiUserList, ApiUserDelete } from '../../api/blog.js';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import UsersAddComp from './add.vue'
-import UsersEditComp from './edit.vue'
+import AddComp from './add.vue'
+import EditComp from './edit.vue'
 const router = useRouter();
 const store = useStore();
 
@@ -62,14 +61,14 @@ const openAdd = ref(false);
 const openEdit = ref(false);
 const currUpdateID = ref(0);
 
-const openAddUser = () => {
+const openAddDrawer = () => {
   openAdd.value = true;
 };
-const openEditUser = (id) => {
+const openEditDrawer = (id) => {
   currUpdateID.value = id;
   openEdit.value = true;
 };
-const openDeleteUser = async (id) => {
+const openDelete = async (id) => {
   let data = await ApiUserDelete({
     id: id
   });
@@ -85,6 +84,7 @@ const openDeleteUser = async (id) => {
 const closeAddComp = () => {
   console.log(" closeAddComp  ")
   openAdd.value = false
+  renderTableList();
 }
 // 重置编辑抽屉
 const closeEditComp = () => {
@@ -103,7 +103,7 @@ const columns = [
 // 表格数据
 const dataSource = ref([]);
 // 渲染表格数据
-const renderUserList = async () => {
+const renderTableList = async () => {
   try {
     let data = await ApiUserList({
       page: 1
@@ -113,7 +113,7 @@ const renderUserList = async () => {
     console.error('Error fetching the list:', error);
   }
 };
-renderUserList();
+renderTableList();
 
 // 单元格开关操作
 const handleStatusChange = (checked, id) => {

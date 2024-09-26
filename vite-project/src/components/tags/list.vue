@@ -1,87 +1,121 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
-  <a-table bordered :data-source="dataSource" :columns="columns">
-    <template #bodyCell="{ column, text, record }">
-      <template v-if="column.dataIndex === 'name'">
-        <div class="editable-cell">
-          <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-            <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
-            <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
-          </div>
-          <div v-else class="editable-cell-text-wrapper">
-            {{ text || ' ' }}
-            <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
-          </div>
-        </div>
+  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddDrawer">Add</a-button>
+
+  <!-- ------------列表------------- -->
+  <a-table :columns="columns" :data-source="dataSource">
+    <template #headerCell="{ column }">
+      {{ column.title }}
+    </template>
+
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'id'">
+        {{ record.id }}
       </template>
+
+      <template v-if="column.dataIndex === 'name'">
+        {{ record.name }}
+      </template>
+
+      <template v-if="column.dataIndex === 'num'">
+        {{ record.num }}
+      </template>
+    
       <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm v-if="dataSource.length" title="Sure to delete?" @confirm="onDelete(record.key)">
-          <a>Delete</a>
-        </a-popconfirm>
+        <span>
+          <a @click="openEditDrawer(record.id)">Edit </a>
+          <a @click="openDelete(record.id)">Delete</a>
+        </span>
       </template>
     </template>
   </a-table>
+
+  <!-- ------------新增抽屉------------- -->
+  <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
+    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add Tags" placement="right"
+    @close="closeAddComp" :destroyOnClose="true">
+    <AddComp />
+  </a-drawer>
+  <!-- ------------修改抽屉------------- -->
+  <a-drawer v-model:open="openEdit" class="custom-class" root-class-name="root-class-name"
+    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Edit Tags" placement="right"
+    @close="closeEditComp" :destroyOnClose="true">
+    <EditComp :id="currUpdateID" />
+  </a-drawer>
+
 </template>
+
 <script setup>
 import { computed, reactive, ref } from 'vue';
-import { cloneDeep } from 'lodash-es';
+import { message } from 'ant-design-vue';
+import { ApiTagsList, ApiTagsDelete } from '../../api/tags.js';
+import { useRouter } from 'vue-router';
+import AddComp from './add.vue'
+import EditComp from './edit.vue'
+const router = useRouter();
+
+
+const openAdd = ref(false);
+const openEdit = ref(false);
+const currUpdateID = ref(0);
+
+const openAddDrawer = () => {
+  openAdd.value = true;
+};
+const openEditDrawer = (id) => {
+  currUpdateID.value = id;
+  openEdit.value = true;
+};
+const openDelete = async (id) => {
+  let data = await ApiTagsDelete({
+    id: id
+  });
+  if (data.code === 0) {
+    message.success('This is a success message');
+  } else {
+    message.error(data.data.msg);
+  }
+
+};
+// 重置新增抽屉
+const closeAddComp = () => {
+  console.log(" closeAddComp  ")
+  openAdd.value = false
+  renderTableList();
+}
+// 重置编辑抽屉
+const closeEditComp = () => {
+  console.log(" closeEditComp  ")
+  currUpdateID.value = 0
+  openEdit.value = false
+}
+// 表格列
 const columns = [
-  {
-    title: 'name',
-    dataIndex: 'name',
-    width: '30%',
-  },
-  {
-    title: 'age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'address',
-    dataIndex: 'address',
-  },
-  {
-    title: 'operation',
-    dataIndex: 'operation',
-  },
+  { title: 'id', dataIndex: 'id', },
+  { title: 'name', dataIndex: 'name', },
+  { title: 'num', dataIndex: 'num', },
+  { title: 'operation', dataIndex: 'operation', },
 ];
-const dataSource = ref([
-  {
-    key: '0',
-    name: 'Edward King 0',
-    age: 32,
-    address: 'London, Park Lane no. 0',
-  },
-  {
-    key: '1',
-    name: 'Edward King 1',
-    age: 32,
-    address: 'London, Park Lane no. 1',
-  },
-]);
-const count = computed(() => dataSource.value.length + 1);
-const editableData = reactive({});
-const edit = key => {
-  editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0]);
+// 表格数据
+const dataSource = ref([]);
+// 渲染表格数据
+const renderTableList = async () => {
+  try {
+    let data = await ApiTagsList({
+      page: 1
+    });
+    dataSource.value = data.data.list
+  } catch (error) {
+    console.error('Error fetching the list:', error);
+  }
 };
-const save = key => {
-  Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
-  delete editableData[key];
-};
-const onDelete = key => {
-  dataSource.value = dataSource.value.filter(item => item.key !== key);
-};
-const handleAdd = () => {
-  const newData = {
-    key: `${count.value}`,
-    name: `Edward King ${count.value}`,
-    age: 32,
-    address: `London, Park Lane no. ${count.value}`,
-  };
-  dataSource.value.push(newData);
-};
+renderTableList();
+ 
+
+
+
 </script>
 
-<style  scoped>
+<style scoped>
 .editable-cell {
   position: relative;
 

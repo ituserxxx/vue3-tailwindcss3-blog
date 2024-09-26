@@ -19,14 +19,6 @@
     </a-form-item>
     <span v:model:value="formState.id" hidden></span>
   </a-form>
-  <!---提示弹窗 -->
-  <a-space direction="vertical" style="width: 100%">
-    <a-alert message="Warning text" banner />
-    <a-alert message="Very long warning text warning text text text text text text text" banner closable />
-    <a-alert :show-icon="false" message="Warning text without icon" banner />
-    <a-alert type="error" message="Error text" banner />
-  </a-space>
-
 </template>
 <script setup>
 import { reactive, ref, toRaw, defineProps } from 'vue';
@@ -82,21 +74,18 @@ const rules = {
 
 
 const renderUserInfo = async () => {
-  try {
-    console.log(` userinfo id : `, props.id)
-    let data = await ApiUserInfo({
-      id: props.id
-    });
-    if (data.code === 0) {
-      formState.name = data.data.name
-      formState.passwd = data.data.passwd
-      formState.status = data.data.status === 1 ? true : false
-    } else {
-      message.error(data.data.msg);
-    }
-  } catch (error) {
-    console.error('Error fetching the list:', error);
+  let data = await ApiUserInfo({
+    id: props.id
+  });
+  if (data.code === 0) {
+    formState.name = data.data.name
+    formState.passwd = data.data.passwd
+    formState.status = data.data.status === 1 ? true : false
+    // message.success('success');
+  } else {
+    message.error(data.data.msg);
   }
+
 };
 renderUserInfo();
 
