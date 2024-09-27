@@ -19,8 +19,15 @@
       <template v-if="column.dataIndex === 'content'">
         {{ record.content }}
       </template>
-      <template v-if="column.dataIndex === 'dateStr'">
-        {{ record.dateStr }}
+    
+      <template v-if="column.dataIndex === 'ip'">
+        {{ record.ip }}
+      </template>
+      <template v-if="column.dataIndex === 'ip_addr'">
+        {{ record.ip_addr }}
+      </template>
+      <template v-if="column.dataIndex === 'create_time'">
+        {{ record.create_time }}
       </template>
       <template v-else-if="column.dataIndex === 'operation'">
         <span>
@@ -61,7 +68,9 @@ const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'name', dataIndex: 'name', },
   { title: 'content', dataIndex: 'content', },
-  { title: 'dateStr', dataIndex: 'dateStr', },
+  { title: 'ip', dataIndex: 'ip', },
+  { title: 'ip_addr', dataIndex: 'ip_addr', },
+  { title: 'create_time', dataIndex: 'create_time', },
   { title: 'operation', dataIndex: 'operation', },
 ];
 // 表格数据

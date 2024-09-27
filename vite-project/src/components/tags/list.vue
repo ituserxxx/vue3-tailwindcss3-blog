@@ -16,8 +16,8 @@
         {{ record.name }}
       </template>
 
-      <template v-if="column.dataIndex === 'num'">
-        {{ record.num }}
+      <template v-if="column.dataIndex === 'article_sum'">
+        {{ record.article_sum }}
       </template>
 
       <template v-else-if="column.dataIndex === 'operation'">
@@ -68,7 +68,7 @@ const currUpdateID = ref(0);
 const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'name', dataIndex: 'name', },
-  { title: 'num', dataIndex: 'num', },
+  { title: 'article_sum', dataIndex: 'article_sum', },
   { title: 'operation', dataIndex: 'operation', },
 ];
 // 表格数据

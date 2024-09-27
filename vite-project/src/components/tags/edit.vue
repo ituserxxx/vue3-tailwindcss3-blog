@@ -33,7 +33,6 @@ const wrapperCol = {
 const formState = reactive({
   id: props.id,
   name: '',
- 
 });
 const rules = {
   name: [
