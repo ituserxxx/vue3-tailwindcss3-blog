@@ -43,14 +43,14 @@
 
   <!-- ------------新增抽屉------------- -->
   <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
-    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add Article" placement="right"
-    @close="closeAddComp" :destroyOnClose="true">
+    :root-style="{ color: 'blue' }" style="color: red" width="100%" title=" Add Article" placement="right"
+    :maskClosable="false" @close="closeAddComp" :destroyOnClose="true">
     <AddComp />
   </a-drawer>
   <!-- ------------修改抽屉------------- -->
   <a-drawer v-model:open="openEdit" class="custom-class" root-class-name="root-class-name"
-    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Edit Article" placement="right"
-    @close="closeEditComp" :destroyOnClose="true">
+    :root-style="{ color: 'blue' }" style="color: red" width="100%" title=" Edit Article" placement="right"
+    :maskClosable="false" @close="closeEditComp" :destroyOnClose="true">
     <EditComp :id="currUpdateID" />
   </a-drawer>
 

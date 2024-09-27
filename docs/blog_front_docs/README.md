@@ -22,6 +22,15 @@ response data
     data: data // api data
 }
 ```
+response err data 
+```
+{
+    code: 0, 
+    msg: "baocuo err is asdf",
+    data: null // api data
+}
+```
+
 下面的接口返回的数据都是 data 的值
 
 #### 文章列表 blog/article/list

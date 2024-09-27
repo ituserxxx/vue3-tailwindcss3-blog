@@ -37,10 +37,10 @@
       </a-layout>
 
     </a-layout>
-
   </a-layout>
 </template>
 <script setup>
+
 import { ref, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 import ArticleAddComp from './article/add.vue'
@@ -58,6 +58,7 @@ const compKeyMap = {
   menuLeaveMessageList: LeaveMessageListComp,
   menuTagsList: TagsListComp
 }
+
 const compSubTitle = [
   {
     menuKey: "article",

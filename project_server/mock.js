@@ -155,14 +155,20 @@ function adminArticlesInfo() {
     id: 1,
     title: 'afasdf22',
     content: "sdfd",
-    create_time: "2020-05-04 15:22:22",
-    update_time: "2020-05-04 15:22:22",
+    createTime: "2020-05-04 15:22:22",
+    updateTime: "2020-05-04 15:22:22",
     status: 1,
-    comments_sum: 0,
-    view_sum: 0,
+    commentsSum: 0,
+    viewSum: 0,
+    tagsIdList: [
+      1, 2
+    ],
   }
 }
 function adminArticlesUpdate() {
+  /*
+{"id":1,"title":"afasdf22","content":"# 阿迪发多少\n阿道夫","status":"1","tagsId":[1,2],"createTime":"2024-09-18T08:58:33.765Z","updateTime":"2024-09-26T16:00:03.330Z"}
+  */
   return {
 
   }
@@ -230,6 +236,12 @@ function adminTagsList() {
       },
       {
         id: 2,
+        name: 'jssssssssss',
+        article_sum: 1,
+      },
+
+      {
+        id: 3,
         name: 'jssssssssss',
         article_sum: 1,
       },
