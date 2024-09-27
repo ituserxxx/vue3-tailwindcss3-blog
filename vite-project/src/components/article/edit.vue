@@ -9,9 +9,9 @@
       <a-input v-model:value="formState.passwd" />
     </a-form-item>
 
-    <!-- <a-form-item label="Availability or not" name="status">
+    <a-form-item label="Availability or not" name="status">
       <a-switch v-model:checked="formState.status" />
-    </a-form-item> -->
+    </a-form-item>
 
 
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -41,7 +41,7 @@ const formState = reactive({
   id: props.id,
   name: '',
   passwd: '',
-  // status: false,
+  status: false,
 });
 const rules = {
   name: [
@@ -80,7 +80,7 @@ const renderUserInfo = async () => {
   if (data.code === 0) {
     formState.name = data.data.name
     formState.passwd = data.data.passwd
-    // formState.status = data.data.status === 1 ? true : false
+    formState.status = data.data.status === 1 ? true : false
     // message.success('success');
   } else {
     message.error(data.data.msg);

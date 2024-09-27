@@ -9,9 +9,9 @@
       <a-input v-model:value="formState.passwd" />
     </a-form-item>
 
-    <a-form-item label="Availability or not" name="status">
+    <!-- <a-form-item label="Availability or not" name="status">
       <a-switch v-model:checked="formState.status" />
-    </a-form-item>
+    </a-form-item> -->
 
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary" @click="onSubmit">Create</a-button>
@@ -21,7 +21,7 @@
 </template>
 <script setup>
 import { reactive, ref, toRaw } from 'vue';
-import { ApiUserAdd } from '../../api/blog.js';
+import { ApiUserAdd } from '../../api/users.js';
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -32,7 +32,7 @@ const wrapperCol = {
 const formState = reactive({
   name: '',
   passwd: '',
-  status: false,
+  // status: false,
 });
 const rules = {
   name: [

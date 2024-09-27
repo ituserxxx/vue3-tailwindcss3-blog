@@ -39,7 +39,7 @@
 
   <!-- ------------新增抽屉------------- -->
   <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
-    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add User" placement="right"
+    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add LeaveMessage" placement="right"
     @close="closeAddComp" :destroyOnClose="true">
     <AddComp />
   </a-drawer>

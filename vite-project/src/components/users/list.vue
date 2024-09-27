@@ -50,7 +50,7 @@
 <script setup>
 import { computed, reactive, ref , watch } from 'vue';
 import { message } from 'ant-design-vue';
-import { ApiUserList, ApiUserDelete } from '../../api/blog.js';
+import { ApiUserList, ApiUserDelete } from '../../api/users.js';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import AddComp from './add.vue'

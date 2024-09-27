@@ -1,45 +1,50 @@
 <template>
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
-    <a-form-item ref="name" label="Activity name" name="name">
-      <a-input v-model:value="formState.name" />
+
+    <a-form-item ref="title" label="Title" name="title">
+      <a-input v-model:value="formState.title" />
     </a-form-item>
-    <a-form-item label="Activity zone" name="region">
-      <a-select v-model:value="formState.region" placeholder="please select your zone">
-        <a-select-option value="shanghai">Zone one</a-select-option>
-        <a-select-option value="beijing">Zone two</a-select-option>
-      </a-select>
-    </a-form-item>
-    <a-form-item label="Activity time" required name="date1">
-      <a-date-picker v-model:value="formState.date1" show-time type="date" placeholder="Pick a date"
-        style="width: 100%" />
-    </a-form-item>
-    <a-form-item label="Instant delivery" name="delivery">
-      <a-switch v-model:checked="formState.delivery" />
-    </a-form-item>
-    <a-form-item label="Activity type" name="type">
-      <a-checkbox-group v-model:value="formState.type">
-        <a-checkbox value="1" name="type">Online</a-checkbox>
-        <a-checkbox value="2" name="type">Promotion</a-checkbox>
-        <a-checkbox value="3" name="type">Offline</a-checkbox>
-      </a-checkbox-group>
-    </a-form-item>
-    <a-form-item label="Resources" name="resource">
-      <a-radio-group v-model:value="formState.resource">
-        <a-radio value="1">Sponsor</a-radio>
-        <a-radio value="2">Venue</a-radio>
+    <a-form-item label="状态" name="status">
+      <a-radio-group v-model:value="formState.status">
+        <a-radio value="1">发布</a-radio>
+        <a-radio value="2">草稿</a-radio>
       </a-radio-group>
     </a-form-item>
-    <a-form-item label="Activity form" name="desc">
-      <a-textarea v-model:value="formState.desc" />
+    <a-form-item label="文章标签"  name="tagsId">
+      <a-checkbox-group v-model:value="formState['tagsId']">
+        <a-row>
+          <a-col :span="8">
+            <a-checkbox value="A" style="line-height: 32px">A</a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="B" style="line-height: 32px">B</a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="C" style="line-height: 32px">C</a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="D" style="line-height: 32px">D</a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="E" style="line-height: 32px">E</a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="F" style="line-height: 32px">F</a-checkbox>
+          </a-col>
+        </a-row>
+      </a-checkbox-group>
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary" @click="onSubmit">Create</a-button>
-      <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
     </a-form-item>
+
+
   </a-form>
 </template>
 <script setup>
-import { reactive, ref, toRaw } from 'vue';
+import { reactive, ref} from 'vue';
+import { ApiUserAdd } from '../../api/users.js';
+
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -48,49 +53,23 @@ const wrapperCol = {
   span: 13,
 };
 const formState = reactive({
-  name: '',
-  region: undefined,
-  date1: undefined,
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
+  title: '',
+  content: '',
+  status: '',
+  tagsId: [],
 });
 const rules = {
   name: [
     {
       required: true,
-      message: 'Please input Activity name',
+      message: 'Please input Login name',
       trigger: 'change',
     },
     {
       min: 3,
-      max: 5,
-      message: 'Length should be 3 to 5',
+      max: 50,
+      message: 'Length should be than 3 character',
       trigger: 'blur',
-    },
-  ],
-  region: [
-    {
-      required: true,
-      message: 'Please select Activity zone',
-      trigger: 'change',
-    },
-  ],
-  date1: [
-    {
-      required: true,
-      message: 'Please pick a date',
-      trigger: 'change',
-      type: 'object',
-    },
-  ],
-  type: [
-    {
-      type: 'array',
-      required: true,
-      message: 'Please select at least one activity type',
-      trigger: 'change',
     },
   ],
   resource: [
@@ -100,25 +79,26 @@ const rules = {
       trigger: 'change',
     },
   ],
-  desc: [
-    {
-      required: true,
-      message: 'Please input activity form',
-      trigger: 'blur',
-    },
-  ],
 };
 const onSubmit = () => {
   formRef.value
     .validate()
-    .then(() => {
-      console.log('values', formState, toRaw(formState));
+    .then(async () => {
+      console.log(" form data", formState)
+      // console.log('values', formState, toRaw(formState));
+      let data = await ApiUserAdd(formState);
+      console.log(" resp data", data.data)
+      if (data.code === 0) {
+        message.success('success');
+      } else {
+        message.error(data.data.msg);
+      }
     })
     .catch(error => {
       console.log('error', error);
     });
 };
-const resetForm = () => {
-  formRef.value.resetFields();
-};
+
 </script>
+
+<style scoped></style>

@@ -25,7 +25,7 @@ http.createServer(function (request, response) {
   })
 
   console.log('请求url->' + request.url)
-  
+
   /*------------- blog front -------------*/
   if (url === '/blog/article/list') {
     data = articleList()
@@ -59,34 +59,49 @@ http.createServer(function (request, response) {
     data = adminUserDelete()
   }
 
-/*------------- blog admin ----tags---------*/
-if (url === '/admin/tags/list') {
-  data = adminTagsList()
-}
-if (url === '/admin/tags/add') {
-  data = adminTagsAdd()
-}
-if (url === '/admin/tags/info') {
-  data = adminTagsInfo()
-}
-if (url === '/admin/tags/update') {
-  data = adminTagsUpdate()
-}
-if (url === '/admin/tags/delte') {
-  data = adminTagsDelete()
-}
+  /*------------- blog admin ----tags---------*/
+  if (url === '/admin/tags/list') {
+    data = adminTagsList()
+  }
+  if (url === '/admin/tags/add') {
+    data = adminTagsAdd()
+  }
+  if (url === '/admin/tags/info') {
+    data = adminTagsInfo()
+  }
+  if (url === '/admin/tags/update') {
+    data = adminTagsUpdate()
+  }
+  if (url === '/admin/tags/delte') {
+    data = adminTagsDelete()
+  }
 
-/*------------- blog admin ----LeaveMessage---------*/
-if (url === '/admin/leaveMessage/list') {
-  data = adminLeaveMessageList()
-}
-if (url === '/admin/leaveMessage/add') {
-  data = adminLeaveMessageAdd()
-}
-if (url === '/admin/leaveMessage/delete') {
-  data = adminLeaveMessageDelete()
-}
-
+  /*------------- blog admin ----LeaveMessage---------*/
+  if (url === '/admin/leaveMessage/list') {
+    data = adminLeaveMessageList()
+  }
+  if (url === '/admin/leaveMessage/add') {
+    data = adminLeaveMessageAdd()
+  }
+  if (url === '/admin/leaveMessage/delete') {
+    data = adminLeaveMessageDelete()
+  }
+  /*------------- blog admin ----articles---------*/
+  if (url === '/admin/articles/list') {
+    data = adminArticlesList()
+  }
+  if (url === '/admin/articles/add') {
+    data = adminArticlesAdd()
+  }
+  if (url === '/admin/articles/info') {
+    data = adminArticlesInfo()
+  }
+  if (url === '/admin/articles/update') {
+    data = adminArticlesUpdate()
+  }
+  if (url === '/admin/articles/delte') {
+    data = adminArticlesDelete()
+  }
 
   // 内容类型: text/plain
   response.writeHead(200,
@@ -98,36 +113,103 @@ if (url === '/admin/leaveMessage/delete') {
     data: data
   }))
 }).listen(6008)
+
+/*------------- blog admin ------articles-------*/
+function adminArticlesList() {
+  /*
+{"page":1,"pageSize":10}
+*/
+  return {
+    list: [
+      {
+        id: 1,
+        title: 'vvvvue',
+        content: "sdfd",
+        create_time: "2020-05-04 15:22:22",
+        update_time: "2020-05-04 15:22:22",
+        status: 1,
+        comments_sum: 0,
+        view_sum: 0,
+      },
+      {
+        id: 1,
+        title: 'afasdf22',
+        content: "sdfd",
+        create_time: "2020-05-04 15:22:22",
+        update_time: "2020-05-04 15:22:22",
+        status: 1,
+        comments_sum: 0,
+        view_sum: 0,
+      },
+    ],
+    total: 10
+  }
+}
+function adminArticlesAdd() {
+  return {
+    id: 1,
+  }
+}
+function adminArticlesInfo() {
+  return {
+    id: 1,
+    title: 'afasdf22',
+    content: "sdfd",
+    create_time: "2020-05-04 15:22:22",
+    update_time: "2020-05-04 15:22:22",
+    status: 1,
+    comments_sum: 0,
+    view_sum: 0,
+  }
+}
+function adminArticlesUpdate() {
+  return {
+
+  }
+}
+function adminArticlesDelete() {
+  return {
+
+  }
+}
+
+
+
 /*------------- blog admin----LeaveMessage-----*/
 function adminLeaveMessageList() {
+  /*
+  {"page":1,"pageSize":10}
+  */
   return {
     list: [
       {
         id: 1,
         name: 'vvvvue',
-        content:"aaaaadfadf",
+        content: "aaaaadfadf",
         create_time: "2020-05-05 15:00:00",
-        ip:"128.0.0.1",
-        ip_addr:"0|0|0|内网IP|内网IP",
+        ip: "128.0.0.1",
+        ip_addr: "0|0|0|内网IP|内网IP",
       },
       {
         id: 2,
         name: 'jssssssssss',
-        content:"aaaaadfadf",
+        content: "aaaaadfadf",
         create_time: "2020-05-05 15:00:00",
-        ip:"128.0.0.1",
-        ip_addr:"0|0|0|内网IP|内网IP",
+        ip: "128.0.0.1",
+        ip_addr: "0|0|0|内网IP|内网IP",
       },
     ],
     total: 10
   }
 }
 function adminLeaveMessageAdd() {
+  /*
+{"name":"adaaaaaaaaaaaaaaaaaaaa","content":"aaaaaaaaaaaaaaaaaaa"}
+*/
   return {
     id: 1,
   }
 }
-
 function adminLeaveMessageDelete() {
   return {
 
@@ -136,6 +218,9 @@ function adminLeaveMessageDelete() {
 
 /*------------- blog admin ------tag-------*/
 function adminTagsList() {
+  /*
+{"page":1,"pageSize":10}
+*/
   return {
     list: [
       {
@@ -153,6 +238,9 @@ function adminTagsList() {
   }
 }
 function adminTagsAdd() {
+  /*
+{"name":"vvvvue"}
+*/
   return {
     id: 1,
   }
@@ -165,6 +253,9 @@ function adminTagsInfo() {
   }
 }
 function adminTagsUpdate() {
+  /*
+  {"id":1,"name":"vvvvue"}
+  */
   return {
 
   }
@@ -177,6 +268,9 @@ function adminTagsDelete() {
 
 /*------------- blog admin -----user--------*/
 function adminUserList() {
+  /*
+  {"page":1,"pageSize":10}
+  */
   return {
     list: [
       {
@@ -209,6 +303,9 @@ function adminUserInfo() {
   }
 }
 function adminUserUpdate() {
+  /**
+   {"id":1,"name":"xxx0","passwd":"xxx","status":false}
+   */
   return {
 
   }
@@ -221,6 +318,9 @@ function adminUserDelete() {
 
 /* ---------------- blog front -------------*/
 function leaveMessageAdd() {
+  /*
+  {"name":"adaaaaaaaaaaaaaaaaaaaa","content":"aaaaaaaaaaaaaaaaaaa"}
+  */
   return {
     id: 998,
     name: "Michael Gough1111",
@@ -232,6 +332,9 @@ function leaveMessageAdd() {
   }
 }
 function leaveMessageList() {
+  /*
+{"page":1,"pageSize":10}
+*/
   return {
     list: [
       {
