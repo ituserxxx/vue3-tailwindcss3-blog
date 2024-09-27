@@ -94,8 +94,9 @@ const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      console.log('values', formState, toRaw(formState));
+      console.log(" form data", formState)
       let data = await ApiUserUpdate(formState);
+      console.log(" resp data", data.data)
       if (data.code === 0) {
         console.log("修改succ ", data.data)
       } else {

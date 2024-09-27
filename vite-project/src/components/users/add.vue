@@ -66,9 +66,10 @@ const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
+      console.log(" form data", formState)
       // console.log('values', formState, toRaw(formState));
       let data = await ApiUserAdd(formState);
-      console.log("新增succ ", data.data)
+      console.log(" resp data", data.data)
       if (data.code === 0) {
         message.success('success');
       } else {

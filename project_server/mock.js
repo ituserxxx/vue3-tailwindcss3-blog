@@ -29,7 +29,6 @@ http.createServer(function (request, response) {
   /*------------- blog front -------------*/
   if (url === '/blog/article/list') {
     data = articleList()
-    console.log(data)
   }
   if (url === '/blog/article/detail') {
     data = articleDetail()
@@ -77,6 +76,17 @@ if (url === '/admin/tags/delte') {
   data = adminTagsDelete()
 }
 
+/*------------- blog admin ----LeaveMessage---------*/
+if (url === '/admin/leaveMessage/list') {
+  data = adminLeaveMessageList()
+}
+if (url === '/admin/leaveMessage/add') {
+  data = adminLeaveMessageAdd()
+}
+if (url === '/admin/leaveMessage/delete') {
+  data = adminLeaveMessageDelete()
+}
+
 
   // 内容类型: text/plain
   response.writeHead(200,
@@ -88,6 +98,38 @@ if (url === '/admin/tags/delte') {
     data: data
   }))
 }).listen(6008)
+/*------------- blog tags -------------*/
+function adminLeaveMessageList() {
+  return {
+    list: [
+      {
+        id: 1,
+        name: 'vvvvue',
+        content:"aaaaadfadf",
+        dateStr: "2020-05-05 15:00:00",
+      },
+      {
+        id: 2,
+        name: 'jssssssssss',
+        content:"aaaaadfadf",
+        dateStr: "2020-05-05 15:00:00",
+      },
+    ],
+    total: 10
+  }
+}
+function adminLeaveMessageAdd() {
+  return {
+    id: 1,
+  }
+}
+
+function adminLeaveMessageDelete() {
+  return {
+
+  }
+}
+
 /*------------- blog tags -------------*/
 function adminTagsList() {
   return {

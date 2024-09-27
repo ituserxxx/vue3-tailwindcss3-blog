@@ -5,24 +5,19 @@
       <a-input v-model:value="formState.name" />
     </a-form-item>
 
-    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-      <a-button type="primary" @click="onSubmit">Commit</a-button>
+    <a-form-item label="Content" name="content">
+      <a-input v-model:value="formState.content" />
     </a-form-item>
-    <span v:model:value="formState.id" hidden></span>
-  </a-form>
  
+    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+      <a-button type="primary" @click="onSubmit">Create</a-button>
+    </a-form-item>
 
+  </a-form>
 </template>
 <script setup>
-import { reactive, ref, toRaw, defineProps } from 'vue';
-import { message } from 'ant-design-vue';
-import { ApiTagsInfo, ApiTagsUpdate } from '../../api/tags.js';
-const props = defineProps({
-  id: {
-    type: Number, // 或者 String，取决于你的需求
-    required: true,
-  },
-});
+import { reactive, ref } from 'vue';
+import { ApiLeaveMessageAdd } from '../../api/leaveMessage.js';
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -31,9 +26,8 @@ const wrapperCol = {
   span: 13,
 };
 const formState = reactive({
-  id: props.id,
   name: '',
- 
+  content: '',
 });
 const rules = {
   name: [
@@ -49,29 +43,30 @@ const rules = {
       trigger: 'blur',
     },
   ],
+  content: [
+    {
+      required: true,
+      message: 'Please input content',
+      trigger: 'change',
+    },
+    {
+      min: 6,
+      max: 200,
+      message: 'Length should be than 6 character',
+      trigger: 'blur',
+    },
+  ],
 };
-
-
-const renderTagsInfo = async () => {
-  let data = await ApiTagsInfo({
-    id: props.id
-  });
-  if (data.code === 0) {
-    formState.name = data.data.name
-  } else {
-    message.error(data.data.msg);
-  }
-
-};
-renderTagsInfo();
-
 const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      let data = await ApiTagsUpdate(formState);
+      console.log(" form data", formState)
+      // console.log('values', formState, toRaw(formState));
+      let data = await ApiLeaveMessageAdd(formState);
+      console.log(" resp data", data.data)
       if (data.code === 0) {
-        console.log("修改succ ", data.data)
+        message.success('success');
       } else {
         message.error(data.data.msg);
       }
@@ -80,7 +75,6 @@ const onSubmit = () => {
       console.log('error', error);
     });
 };
-
 
 </script>
 

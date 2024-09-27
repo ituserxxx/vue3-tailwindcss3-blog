@@ -1,87 +1,129 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
-  <a-table bordered :data-source="dataSource" :columns="columns">
-    <template #bodyCell="{ column, text, record }">
+  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddDrawer">Add</a-button>
+
+  <!-- ------------列表------------- -->
+  <a-table :columns="columns" :data-source="dataSource"  :pagination="pageConfig" @change="handleTableChange">
+    <template #headerCell="{ column }">
+      {{ column.title }}
+    </template>
+
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'id'">
+        {{ record.id }}
+      </template>
+
       <template v-if="column.dataIndex === 'name'">
-        <div class="editable-cell">
-          <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-            <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
-            <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
-          </div>
-          <div v-else class="editable-cell-text-wrapper">
-            {{ text || ' ' }}
-            <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
-          </div>
-        </div>
+        {{ record.name }}
+      </template>
+
+      <template v-if="column.dataIndex === 'content'">
+        {{ record.content }}
+      </template>
+      <template v-if="column.dataIndex === 'dateStr'">
+        {{ record.dateStr }}
       </template>
       <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm v-if="dataSource.length" title="Sure to delete?" @confirm="onDelete(record.key)">
-          <a>Delete</a>
-        </a-popconfirm>
+        <span>
+          <a @click="openDelete(record.id)">Delete</a>
+        </span>
       </template>
     </template>
   </a-table>
+
+  <!-- ------------新增抽屉------------- -->
+  <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
+    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add User" placement="right"
+    @close="closeAddComp" :destroyOnClose="true">
+    <AddComp />
+  </a-drawer>
+ 
+
 </template>
+
 <script setup>
-import { computed, reactive, ref } from 'vue';
-import { cloneDeep } from 'lodash-es';
+import { ref , watch } from 'vue';
+import { message } from 'ant-design-vue';
+import { ApiLeaveMessageDelete,ApiLeaveMessageList } from '../../api/leaveMessage.js';
+import AddComp from './add.vue'
+ 
+
+const pageConfig = ref({
+  current: 1,
+  pageSize: 10,
+  total: 50,
+  position: ["bottomLeft"],
+})
+const openAdd = ref(false);
+
+ 
+// 表格列
 const columns = [
-  {
-    title: 'name',
-    dataIndex: 'name',
-    width: '30%',
-  },
-  {
-    title: 'age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'address',
-    dataIndex: 'address',
-  },
-  {
-    title: 'operation',
-    dataIndex: 'operation',
-  },
+  { title: 'id', dataIndex: 'id', },
+  { title: 'name', dataIndex: 'name', },
+  { title: 'content', dataIndex: 'content', },
+  { title: 'dateStr', dataIndex: 'dateStr', },
+  { title: 'operation', dataIndex: 'operation', },
 ];
-const dataSource = ref([
-  {
-    key: '0',
-    name: 'Edward King 0',
-    age: 32,
-    address: 'London, Park Lane no. 0',
-  },
-  {
-    key: '1',
-    name: 'Edward King 1',
-    age: 32,
-    address: 'London, Park Lane no. 1',
-  },
-]);
-const count = computed(() => dataSource.value.length + 1);
-const editableData = reactive({});
-const edit = key => {
-  editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0]);
+// 表格数据
+const dataSource = ref([]);
+const openAddDrawer = () => {
+  openAdd.value = true;
 };
-const save = key => {
-  Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
-  delete editableData[key];
+
+const openDelete = async (id) => {
+  let data = await ApiLeaveMessageDelete({
+    id: id
+  });
+ 
+  if (data.code === 0) {
+    message.success('This is a success message');
+  } else {
+    message.error(data.data.msg);
+  }
+
 };
-const onDelete = key => {
-  dataSource.value = dataSource.value.filter(item => item.key !== key);
+
+const handleTableChange = (pagination, filters, sorter, { currentDataSource }) => {
+  console.log('Pagination:', pagination);
+  // console.log('Filters:', filters);
+  // console.log('Sorter:', sorter);
+  // console.log('Current Data Source:', currentDataSource);
+  pageConfig.value = pagination
 };
-const handleAdd = () => {
-  const newData = {
-    key: `${count.value}`,
-    name: `Edward King ${count.value}`,
-    age: 32,
-    address: `London, Park Lane no. ${count.value}`,
-  };
-  dataSource.value.push(newData);
+watch(pageConfig, (newValue, oldValue) => {
+  console.log('Page configuration changed:', newValue);
+
+  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
+});
+
+
+// 重置新增抽屉
+const closeAddComp = () => {
+  console.log(" closeAddComp  ")
+  openAdd.value = false
+  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
+}
+ 
+
+// 渲染表格数据
+const renderTableList = async (page, pageSize) => {
+  try {
+    let data = await ApiLeaveMessageList({
+      page: page,
+      pageSize: pageSize,
+    });
+    dataSource.value = data.data.list
+    pageConfig.value.total = data.data.total
+  } catch (error) {
+    console.error('Error fetching the list:', error);
+  }
 };
+renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
+
+
 </script>
 
-<style  scoped>
+<style scoped>
 .editable-cell {
   position: relative;
 

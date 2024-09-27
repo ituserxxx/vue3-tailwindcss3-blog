@@ -1,18 +1,9 @@
 <template>
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
 
-    <a-form-item ref="name" label="Login Name" name="name">
+    <a-form-item ref="name" label="Name" name="name">
       <a-input v-model:value="formState.name" />
     </a-form-item>
-
-    <a-form-item label="Password" name="passwd">
-      <a-input v-model:value="formState.passwd" />
-    </a-form-item>
-
-    <a-form-item label="Availability or not" name="status">
-      <a-switch v-model:checked="formState.status" />
-    </a-form-item>
-
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary" @click="onSubmit">Create</a-button>
     </a-form-item>
@@ -21,7 +12,8 @@
 </template>
 <script setup>
 import { reactive, ref, toRaw } from 'vue';
-import { ApiUserAdd } from '../../api/blog.js';
+import { ApiTagsAdd } from '../../api/tags.js';
+import { message } from 'ant-design-vue';
 const formRef = ref();
 const labelCol = {
   span: 5,
@@ -31,14 +23,12 @@ const wrapperCol = {
 };
 const formState = reactive({
   name: '',
-  passwd: '',
-  status: false,
 });
 const rules = {
   name: [
     {
       required: true,
-      message: 'Please input Login name',
+      message: 'Please input  name',
       trigger: 'change',
     },
     {
@@ -48,27 +38,14 @@ const rules = {
       trigger: 'blur',
     },
   ],
-  passwd: [
-    {
-      required: true,
-      message: 'Please input Login Password',
-      trigger: 'change',
-    },
-    {
-      min: 6,
-      max: 50,
-      message: 'Length should be than 6 character',
-      trigger: 'blur',
-    },
-  ],
 };
 const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      // console.log('values', formState, toRaw(formState));
-      let data = await ApiUserAdd(formState);
-      console.log("新增succ ", data.data)
+      console.log(" form data", formState)
+      let data = await ApiTagsAdd(formState);
+      console.log(" resp data", data.data)
       if (data.code === 0) {
         message.success('success');
       } else {
