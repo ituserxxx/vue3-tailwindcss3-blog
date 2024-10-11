@@ -55,7 +55,6 @@ public class LeaveMessagesController {
             result.setData("留言成功");
         } else {
             result.setData("留言失败");
-            result.setMsg(false);
             result.setCode(1);
         }
         return result;

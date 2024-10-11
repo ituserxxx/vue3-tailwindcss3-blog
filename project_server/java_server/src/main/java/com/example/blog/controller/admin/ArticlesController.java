@@ -38,7 +38,6 @@ public class ArticlesController {
             result.setData(map);
         } catch (NumberFormatException e) {
             result.setData("page或tagId格式错误");
-            result.setMsg(false);
             result.setCode(1);
         }
 
@@ -59,7 +58,6 @@ public class ArticlesController {
         } catch (NumberFormatException e) {
             result.setData("id格式错误");
             result.setMsg(false);
-            result.setCode(1);
         }
         return result;
     }

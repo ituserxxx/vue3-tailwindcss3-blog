@@ -6,12 +6,12 @@ import lombok.Data;
 public class Result {
     private Object data;
 
-    private boolean msg;
+    private String msg;
 
     private int code;
 
     public Result() {
-        this.msg = true;
+        this.msg = "ok";
         this.code = 0;
     }
 }

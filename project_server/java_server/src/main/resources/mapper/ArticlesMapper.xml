@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.blog.mapper.ArticleMapper">
+<mapper namespace="com.example.blog.mapper.ArticlesMapper">
     <resultMap id="ArticleDetail" type="com.example.blog.dto.ArticleDetailResp">
         <result property="id" column="id"></result>
         <result property="date" column="update_time"></result>
