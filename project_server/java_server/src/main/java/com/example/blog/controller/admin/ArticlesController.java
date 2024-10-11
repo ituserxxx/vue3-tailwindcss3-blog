@@ -51,13 +51,12 @@ public class ArticlesController {
             int articleId = Integer.parseInt(id);
             ArticleDetailResp articleDetailResp = articleService.detail(articleId);
             if (null == articleDetailResp) {
-                result.setData("文章不存在");
+                result.setMsg("文章不存在");
             } else {
                 result.setData(articleDetailResp);
             }
         } catch (NumberFormatException e) {
-            result.setData("id格式错误");
-            result.setMsg(false);
+            result.setMsg("id格式错误");
         }
         return result;
     }
