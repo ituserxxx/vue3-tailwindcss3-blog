@@ -1,5 +1,8 @@
 import http from '../utils/http'
 
+export function ApiUserLogin(data) {
+    return http.post('/user/login', data)
+}
 export function ApiUserAdd(data) {
     return http.post('/user/add', data)
 }

@@ -118,7 +118,6 @@ const handleTableChange = (pagination, filters, sorter, { currentDataSource }) =
 };
 watch(pageConfig, (newValue, oldValue) => {
   console.log('Page configuration changed:', newValue);
-
   renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 });
 
