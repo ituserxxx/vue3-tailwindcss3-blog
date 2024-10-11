@@ -1,6 +1,6 @@
 package com.example.blog.dto;
 
-import com.example.blog.Model.Tag;
+import com.example.blog.Model.Tags;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,5 +15,5 @@ public class ArticleDetailResp {
 
     private String content;
 
-    private List<Tag> tags;
+    private List<Tags> tags;
 }

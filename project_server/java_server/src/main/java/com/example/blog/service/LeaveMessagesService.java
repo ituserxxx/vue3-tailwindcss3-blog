@@ -1,7 +1,7 @@
 package com.example.blog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.blog.Model.LeaveMessage;
+import com.example.blog.Model.LeaveMessages;
 import com.example.blog.mapper.LeaveMessageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LeaveMessageService {
+public class LeaveMessagesService {
     @Autowired
     private LeaveMessageMapper leaveMessageMapper;
 
-    public List<LeaveMessage> list(int offset){
+    public List<LeaveMessages> list(int offset){
         return leaveMessageMapper.getListByPage(offset);
     }
-    public Integer add(LeaveMessage leaveMessage){
+    public Integer add(LeaveMessages leaveMessage){
         return leaveMessageMapper.insert(leaveMessage);
     }
 }

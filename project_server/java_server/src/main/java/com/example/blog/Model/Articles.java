@@ -4,11 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @TableName("articles")
-public class Article {
+public class Articles {
 
     private Integer id;
 

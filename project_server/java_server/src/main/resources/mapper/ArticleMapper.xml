@@ -10,7 +10,7 @@
         <result property="view" column="view_sum"></result>
         <result property="title" column="title"></result>
         <result property="content" column="content"></result>
-        <collection property="tags" ofType="com.example.blog.Model.Tag">
+        <collection property="tags" ofType="com.example.blog.Model.Tags">
             <result property="id" column="t_id"></result>
             <result property="name" column="t_name"></result>
             <result property="articleSum" column="a_sum"></result>

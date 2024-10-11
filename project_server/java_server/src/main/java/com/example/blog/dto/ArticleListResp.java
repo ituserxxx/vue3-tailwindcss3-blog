@@ -9,6 +9,5 @@ public class ArticleListResp {
     private int id;
     private Date date;
     private String title;
-
     private String body;
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @TableName("tags")
-public class Tag {
+public class Tags {
 
     private Integer id;
 

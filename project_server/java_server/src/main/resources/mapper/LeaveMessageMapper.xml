@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.blog.mapper.LeaveMessageMapper">
 
-    <select id="getListByPage" resultType="com.example.blog.Model.LeaveMessage">
+    <select id="getListByPage" resultType="com.example.blog.Model.LeaveMessages">
         select * from leave_messages limit #{param},10
     </select>
 </mapper>

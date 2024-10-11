@@ -1,9 +1,6 @@
 package com.example.blog.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.example.blog.Model.Article;
 import com.example.blog.dto.ArticleDetailResp;
 import com.example.blog.dto.ArticleListResp;
 import com.example.blog.mapper.ArticleMapper;
@@ -14,16 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ArticleService {
+public class ArticlesService {
     @Autowired
     private ArticleMapper articleMapper;
 
-    public List<ArticleListResp> list(Map<String,Integer> param) {
+    public List<ArticleListResp> list(Map<String, Integer> param) {
         return articleMapper.getArticleListByPageAndTag(param);
     }
-    public Integer count(Map<String,Integer> param) {
+
+    public Integer count(Map<String, Integer> param) {
         return articleMapper.getArticleCountByTag(param);
     }
+
     public ArticleDetailResp detail(int id) {
         UpdateWrapper updateWrapper = new UpdateWrapper();
         updateWrapper.eq("id", id);

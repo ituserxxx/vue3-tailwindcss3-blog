@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @TableName("leave_messages")
-public class LeaveMessage {
+public class LeaveMessages {
 
     private Integer id;
 

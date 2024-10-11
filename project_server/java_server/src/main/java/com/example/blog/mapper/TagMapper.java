@@ -1,7 +1,7 @@
 package com.example.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.blog.Model.Tag;
+import com.example.blog.Model.Tags;
 
-public interface TagMapper extends BaseMapper<Tag> {
+public interface TagMapper extends BaseMapper<Tags> {
 }
