@@ -40,19 +40,19 @@ const formState = reactive({
 const router = useRouter();
 
 const onFinish = async values => {
-  console.log('login req info:', values);
 
   let data = await ApiUserLogin({
     username: formState.username,
     passwd: formState.password
   });
+
   if (data.code === 0) {
     message.success('登录成功（^_^）');
     store.commit("update_uid", data.data)
     // 跳转到目标页面
     router.push('/home'); // 替换为你想跳转的页面路径
   } else {
-    message.error(data.data.msg);
+    message.error(data.msg);
   }
 
 };

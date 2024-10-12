@@ -1,5 +1,5 @@
 import Axios from 'axios'
-
+// import { message } from 'ant-design-vue';
 const request = Axios.create({
     headers: {
         'Content-Type': 'application/json'
@@ -27,16 +27,12 @@ request.interceptors.request.use(req => {
 request.interceptors.response.use(
     response => {
         // console.log(response)
-        const res = response.data
-        if (res.code !== 0) {
-            // Message({
-            //     message: res.msg,
-            //     type: 'error',
-            //     duration: 5 * 1000
-            //   })
-            return
-        }
-        return response.data
+        const res = response
+        // if (res.data.code !== 0) {
+        //     message.error(res.data.msg);
+        //     return
+        // }
+        return res.data
     },
     error => {
         // 响应失败统一处理

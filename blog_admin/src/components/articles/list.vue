@@ -66,7 +66,7 @@ import EditComp from './edit.vue'
 
 import { useStore } from 'vuex';
 const store = useStore();
-console.log("uid===>",store.state.uid)
+console.log("uid===>", store.state.uid)
 const pageConfig = ref({
   current: 1,
   pageSize: 10,
@@ -142,8 +142,10 @@ const renderTableList = async (page, pageSize) => {
       page: page,
       pageSize: pageSize,
     });
-    dataSource.value = data.data.list
-    pageConfig.value.total = data.data.total
+    if (data.code == 0) {
+      dataSource.value = data.data.list
+      pageConfig.value.total = data.data.total
+    }
   } catch (error) {
     console.error('Error fetching the list:', error);
   }

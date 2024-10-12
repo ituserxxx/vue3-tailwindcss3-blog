@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:6008/', // 目标 API 的地址
+        target: 'http://172.16.9.103:6008', // 目标 API 的地址
         changeOrigin: true, // 支持跨域
         rewrite: (path) => path.replace(/^\/api/, ''), // 重写路径
       },
