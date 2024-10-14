@@ -7,4 +7,8 @@
         SELECT * from users where name=#{username} and passwd=#{passwd} 
     </select>
 
+    <select id="GetList" resultType="com.example.blog.Model.Users"> 
+        SELECT * FROM users Order By id Desc limit #{limit} offset  #{offset} 
+    </select>
+
 </mapper>

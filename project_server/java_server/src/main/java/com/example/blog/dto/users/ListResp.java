@@ -1,13 +1,13 @@
-package com.example.blog.dto.tags;
+package com.example.blog.dto.users;
 
 import java.util.List;
 
-import com.example.blog.Model.Tags;
+import com.example.blog.Model.Users;
 
 import lombok.Data;
 
 @Data
 public class ListResp {
-    private List<Tags> list;
+    private List<Users> list;
     private Integer total;
 }

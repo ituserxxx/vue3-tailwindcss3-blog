@@ -8,8 +8,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.blog.Model.Users;
 
 public interface UsersMapper extends BaseMapper<Users> {
+
     public Users GetOneByUsernameAndPasswd(@Param("username") String username, @Param("passwd") String passwd);
 
-    public List<Users> GetList(Integer page, Integer pageSize);
+    // public List<Users> GetList(Integer page, Integer pageSize);
 
 }
