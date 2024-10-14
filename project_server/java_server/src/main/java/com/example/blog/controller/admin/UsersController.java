@@ -1,6 +1,7 @@
 package com.example.blog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.example.blog.Model.Users;
 import com.example.blog.common.Result;
+import com.example.blog.dto.PageReq;
 import com.example.blog.dto.users.DelReq;
 import com.example.blog.dto.users.LoginReq;
 import com.example.blog.mapper.UsersMapper;
@@ -85,4 +87,18 @@ public class UsersController {
         return result;
     }
 
+    @PostMapping("/list")
+    public Result List(@Validated @RequestBody PageReq req, BindingResult err) {
+        Result result = new Result();
+        try {
+            if (err.hasErrors()) {
+                throw new Exception(err.getAllErrors().get(0).getDefaultMessage());
+            }
+            // todo
+        } catch (Exception e) {
+            result.setCode(2300);
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 }
