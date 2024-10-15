@@ -8,25 +8,7 @@
     </template>
 
     <template #bodyCell="{ column, record }">
-      <template v-if="column.dataIndex === 'id'">
-        {{ record.id }}
-      </template>
 
-      <template v-if="column.dataIndex === 'title'">
-        {{ record.title }}
-      </template>
-      <template v-if="column.dataIndex === 'comments_sum'">
-        {{ record.comments_sum }}
-      </template>
-      <template v-if="column.dataIndex === 'view_sum'">
-        {{ record.view_sum }}
-      </template>
-      <template v-if="column.dataIndex === 'create_time'">
-        {{ record.create_time }}
-      </template>
-      <template v-if="column.dataIndex === 'update_time'">
-        {{ record.update_time }}
-      </template>
       <template v-if="column.dataIndex === 'status'">
         <a-switch :checked="record.status === 1" @change="(checked) => handleStatusChange(checked, record.id)" />
       </template>
@@ -80,11 +62,11 @@ const currUpdateID = ref(0);
 const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'title', dataIndex: 'title', },
-  { title: 'content', dataIndex: 'content', },
-  { title: 'comments_sum', dataIndex: 'comments_sum', },
-  { title: 'view_sum', dataIndex: 'view_sum', },
-  { title: 'create_time', dataIndex: 'create_time', },
-  { title: 'update_time', dataIndex: 'update_time', },
+  // { title: 'content', dataIndex: 'content', },
+  { title: 'commentsSum', dataIndex: 'commentsSum', },
+  { title: 'viewSum', dataIndex: 'viewSum', },
+  { title: 'createTime', dataIndex: 'createTime', },
+  { title: 'updateTime', dataIndex: 'updateTime', },
   { title: 'status', dataIndex: 'status', },
   { title: 'operation', dataIndex: 'operation', },
 ];
@@ -102,7 +84,8 @@ const openDelete = async (id) => {
     id: id
   });
   if (data.code === 0) {
-    message.success('This is a success message');
+    message.success('success');
+    renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
   } else {
     message.error(data.data.msg);
   }
@@ -133,6 +116,7 @@ const closeEditComp = () => {
   console.log(" closeEditComp  ")
   currUpdateID.value = 0
   openEdit.value = false
+  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 }
 
 // 渲染表格数据

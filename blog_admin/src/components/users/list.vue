@@ -91,6 +91,7 @@ const openDelete = async (id) => {
   console.log(`ApiUserDelete= ${data}`);
   if (data.code === 0) {
     message.success('This is a success message');
+    renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
   } else {
     message.error(data.data.msg);
   }
@@ -122,6 +123,7 @@ const closeEditComp = () => {
   console.log(" closeEditComp  ")
   currUpdateID.value = 0
   openEdit.value = false
+  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 }
 
 // 渲染表格数据

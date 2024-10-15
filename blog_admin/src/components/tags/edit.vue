@@ -10,7 +10,7 @@
     </a-form-item>
     <span v:model:value="formState.id" hidden></span>
   </a-form>
- 
+
 
 </template>
 <script setup>
@@ -71,6 +71,7 @@ const onSubmit = () => {
       let data = await ApiTagsUpdate(formState);
       if (data.code === 0) {
         console.log("修改succ ", data.data)
+        message.success("success");
       } else {
         message.error(data.data.msg);
       }

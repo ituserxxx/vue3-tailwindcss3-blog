@@ -1,8 +1,8 @@
 <template>
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
 
-    <a-form-item ref="name" label="Login Name" name="name">
-      <a-input v-model:value="formState.name" />
+    <a-form-item ref="username" label="Login Name" name="username">
+      <a-input v-model:value="formState.username" />
     </a-form-item>
 
     <a-form-item label="Password" name="passwd">
@@ -31,12 +31,12 @@ const wrapperCol = {
   span: 13,
 };
 const formState = reactive({
-  name: '',
+  username: '',
   passwd: '',
   // status: false,
 });
 const rules = {
-  name: [
+  username: [
     {
       required: true,
       message: 'Please input Login name',

@@ -41,7 +41,7 @@ import "md-editor-v3/lib/style.css";
 import { ApiArticlesAdd } from '../../api/articles.js';
 import { ApiTagsList } from '../../api/tags.js';
 const formRef = ref();
-const selectedValues = ref([]); // 存储选中的复选框值
+const selectedValues = ref(); // 存储选中的复选框值
 const tagsList = ref([
   // { id: 1, name: 'A' },
   // { id: 2, name: 'B' },
@@ -83,7 +83,7 @@ const onSubmit = () => {
       if (data.code === 0) {
         message.success('success');
       } else {
-        message.error(data.data.msg);
+        message.error(data.msg);
       }
     })
     .catch(error => {

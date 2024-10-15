@@ -16,8 +16,8 @@
         {{ record.name }}
       </template>
 
-      <template v-if="column.dataIndex === 'article_sum'">
-        {{ record.article_sum }}
+      <template v-if="column.dataIndex === 'articleSum'">
+        {{ record.articleSum }}
       </template>
 
       <template v-else-if="column.dataIndex === 'operation'">
@@ -68,7 +68,7 @@ const currUpdateID = ref(0);
 const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'name', dataIndex: 'name', },
-  { title: 'article_sum', dataIndex: 'article_sum', },
+  { title: 'articleSum', dataIndex: 'articleSum', },
   { title: 'operation', dataIndex: 'operation', },
 ];
 // 表格数据
@@ -88,7 +88,8 @@ const openDelete = async (id) => {
     id: id
   });
   if (data.code === 0) {
-    message.success('This is a success message');
+    message.success('success');
+    renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
   } else {
     message.error(data.data.msg);
   }
@@ -119,6 +120,7 @@ const closeEditComp = () => {
   console.log(" closeEditComp  ")
   currUpdateID.value = 0
   openEdit.value = false
+  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 }
 
 // 渲染表格数据

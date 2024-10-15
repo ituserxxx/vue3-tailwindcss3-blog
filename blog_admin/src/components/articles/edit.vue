@@ -22,10 +22,12 @@
       </a-checkbox-group>
     </a-form-item>
     <a-form-item label="Create time" required name="createTime">
-      <a-date-picker v-model:value="formState.createTime" show-time type="date" style="width: 50%" />
+      <a-date-picker v-model:value="formState.createTime" show-time format="YYYY-MM-DD HH:mm:ss"
+        value-format="YYYY-MM-DD HH:mm:ss" type="date" style="width: 50%" />
     </a-form-item>
     <a-form-item label="Update time" name="updateTime">
-      <a-date-picker v-model:value="formState.updateTime" show-time type="date" style="width: 50%" />
+      <a-date-picker v-model:value="formState.updateTime" show-time format="YYYY-MM-DD HH:mm:ss"
+        value-format="YYYY-MM-DD HH:mm:ss" type="date" style="width: 50%" />
     </a-form-item>
     <a-form-item label="Content">
       <br><br>
@@ -108,7 +110,7 @@ const renderArticlesInfo = async () => {
     formState.createTime = data.data.createTime
     formState.updateTime = data.data.updateTime
   } else {
-    message.error(data.data.msg);
+    message.error(data.msg);
   }
 };
 const renderTagsList = async () => {
