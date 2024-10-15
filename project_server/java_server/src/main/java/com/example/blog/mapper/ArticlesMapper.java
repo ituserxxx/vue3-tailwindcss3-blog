@@ -26,9 +26,39 @@ public interface ArticlesMapper extends BaseMapper<Articles> {
     public List<Articles> GetList(@Param("offset") Integer offset, @Param("limit") Integer limit);
 
     @Select({
-        "<script>",
-        "select count(1) from articles",
-        "</script>",
+            "<script>",
+            "SELECt at.* FROM articles AS at ",
+            "WHERE ",
+            "at.id >0 ",
+            "<if test='tagId != 0'>",
+            "LEFT JOIN article_tag_rela as atr on atr.article_id=at.id ",
+            "AND atr.tag_id = #{tag_id}",
+            "</if>",
+            "ORDER BY at.id DESC LIMIT #{offset},#{limit}",
+            "</script>"
+    })
+    public List<Articles> GetArticlesListByTagId(@Param("offset") Integer offset, @Param("limit") Integer limit,
+            @Param("tagId") Integer tagId);
+
+    @Select({
+            "<script>",
+
+            "SELECt COUNT(at.id) FROM articles AS at ",
+            "WHERE ",
+            "at.id >0 ",
+            "<if test='tagId != 0'>",
+            "LEFT JOIN article_tag_rela as atr on atr.article_id=at.id ",
+            "AND atr.tag_id = #{tag_id}",
+            "</if>",
+
+            "</script>"
+    })
+    public Integer GetArticlesListByTagIdCount(@Param("tagId") Integer tagId);
+
+    @Select({
+            "<script>",
+            "select count(1) from articles",
+            "</script>",
     })
     public Integer GetListCount();
 }

@@ -30,15 +30,15 @@
                                 </path>
                                 <path d="M0 0h24v24H0z" fill="none"></path>
                             </svg>
-                            <span class="ml-1">{{ ViewData.view }}</span></a>
+                            <span class="ml-1">{{ ViewData.viewSum }}</span></a>
 
                     </div>
                     <hr>
                     <!-- content -->
                     <Markdown :source="ViewData.content" />
-                    <!-- tags -->
+                    <!-- tagsList -->
                     <div class="flex flex-wrap gap-2">
-                        <a v-for="(tag, index) in ViewData.tags" :key="index" :href="`/tag/${tag.id}`"
+                        <a v-for="(tag, index) in ViewData.tagsList" :key="index" :href="`/tag/${tag.id}`"
                             class="flex items-center text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
                             <svg class="text-indigo-600" fill="currentColor" height="16px" aria-hidden="true" role="img"
                                 focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
@@ -63,17 +63,16 @@ import 'highlight.js/styles/panda-syntax-dark.css'
 import Markdown from 'vue3-markdown-it';
 import { articleDetailApi } from '../api/blog';
 import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
-
 const props = defineProps({
     articleId: String,
 });
 const ViewData = ref({
     id: 0,
     date: "",
-    view: 0,
+    viewSum: 0,
     title: "",
     content: "",
-    tags: []
+    tagsList: []
 });
 const renderArticleDetail = async () => {
     try {
@@ -88,10 +87,10 @@ const renderArticleDetail = async () => {
 
         ViewData.value.id = data.id
         ViewData.value.date = data.date
-        ViewData.value.view = data.view
+        ViewData.value.viewSum = data.viewSum
         ViewData.value.title = data.title
         ViewData.value.content = data.content
-        ViewData.value.tags = data.tags
+        ViewData.value.tagsList = data.tagsList
     } catch (error) {
         console.error('Error fetching the list:', error);
     }

@@ -13,6 +13,5 @@ public class AddReq {
     private String content;
     @Min(value = 0, message = "status cannot be empty")
     private Integer status;
-
     private Integer[] tagsId;
 }

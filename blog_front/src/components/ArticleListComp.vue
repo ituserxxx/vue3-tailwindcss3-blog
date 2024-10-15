@@ -23,14 +23,14 @@
     </div>
 </template>
 <script setup>
-import { ref,defineProps, onMounted,watch } from 'vue';
+import { ref, defineProps, onMounted, watch } from 'vue';
 import PageComp from './PageComp.vue';
 import { articleListApi } from '../api/blog';
 const props = defineProps({
     currentTagId: Number,
 });
 const ViewData = ref({
-    currentTagId:Number(props.currentTagId==undefined ?0:props.currentTagId),
+    currentTagId: Number(props.currentTagId == undefined ? 0 : props.currentTagId),
     currPage: 1,
     total: 10,
     articleList: []
@@ -43,16 +43,15 @@ const renderArticleList = async () => {
     try {
         let data = await articleListApi({
             page: ViewData.value.currPage,
-            tagId:ViewData.value.currentTagId,
+            tagId: ViewData.value.currentTagId,
         });
-        data = data.data;
+        console.log(data);
         if (data.code > 0) {
             console.error('Error fetching the list:');
             return
         }
-
-        ViewData.value.articleList = data.articleList
-        ViewData.value.total = data.total
+        ViewData.value.articleList = data.data.list
+        ViewData.value.total = data.data.total
     } catch (error) {
         console.error('Error fetching the list:', error);
     }

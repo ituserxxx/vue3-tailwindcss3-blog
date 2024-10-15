@@ -27,35 +27,35 @@ http.createServer(function (request, response) {
   console.log('请求url->' + request.url)
 
   /*------------- blog front -------------*/
-  if (url === '/blog/article/list') {
+  if (url === '/blog/articles/list') {
     data = articleList()
   }
-  if (url === '/blog/article/detail') {
+  if (url === '/blog/articles/detail') {
     data = articleDetail()
   }
-  if (url === '/blog/tag/list') {
+  if (url === '/blog/tags/list') {
     data = tagList()
   }
-  if (url === '/blog/leaveMessage/list') {
+  if (url === '/blog/leaveMessages/list') {
     data = leaveMessageList()
   }
-  if (url === '/blog/leaveMessage/add') {
+  if (url === '/blog/leaveMessages/add') {
     data = leaveMessageAdd()
   }
   /*------------- blog admin -----user--------*/
-  if (url === '/admin/user/list') {
+  if (url === '/admin/users/list') {
     data = adminUserList()
   }
-  if (url === '/admin/user/add') {
+  if (url === '/admin/users/add') {
     data = adminUserAdd()
   }
-  if (url === '/admin/user/info') {
+  if (url === '/admin/users/info') {
     data = adminUserInfo()
   }
-  if (url === '/admin/user/update') {
+  if (url === '/admin/users/update') {
     data = adminUserUpdate()
   }
-  if (url === '/admin/user/delte') {
+  if (url === '/admin/users/delte') {
     data = adminUserDelete()
   }
 
@@ -77,13 +77,13 @@ http.createServer(function (request, response) {
   }
 
   /*------------- blog admin ----LeaveMessage---------*/
-  if (url === '/admin/leaveMessage/list') {
+  if (url === '/admin/leaveMessages/list') {
     data = adminLeaveMessageList()
   }
-  if (url === '/admin/leaveMessage/add') {
+  if (url === '/admin/leaveMessages/add') {
     data = adminLeaveMessageAdd()
   }
-  if (url === '/admin/leaveMessage/delete') {
+  if (url === '/admin/leaveMessages/delete') {
     data = adminLeaveMessageDelete()
   }
   /*------------- blog admin ----articles---------*/

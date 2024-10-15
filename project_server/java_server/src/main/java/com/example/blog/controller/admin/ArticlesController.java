@@ -16,7 +16,6 @@ import com.example.blog.mapper.ArticlesMapper;
 import com.example.blog.mapper.TagsMapper;
 import com.example.blog.service.ArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
