@@ -11,6 +11,7 @@ public interface UsersMapper extends BaseMapper<Users> {
 
     public Users GetOneByUsernameAndPasswd(@Param("username") String username, @Param("passwd") String passwd);
 
-    // public List<Users> GetList(Integer page, Integer pageSize);
+    public List<Users> GetList(@Param("offset") Integer offset, @Param("limit") Integer limit);
 
+    public Integer GetListCount();
 }

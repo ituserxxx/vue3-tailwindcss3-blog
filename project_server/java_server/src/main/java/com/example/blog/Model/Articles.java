@@ -1,5 +1,7 @@
 package com.example.blog.Model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -8,7 +10,7 @@ import java.util.Date;
 @Data
 @TableName("articles")
 public class Articles {
-
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String title;
@@ -19,9 +21,9 @@ public class Articles {
 
     private Date updateTime;
 
-    private int status;
+    private Integer status;
 
-    private int comments_sum;
+    private Integer commentsSum;
 
-    private int view_sum;
+    private Integer viewSum;
 }

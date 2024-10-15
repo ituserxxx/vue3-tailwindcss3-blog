@@ -8,7 +8,9 @@
     </select>
 
     <select id="GetList" resultType="com.example.blog.Model.Users"> 
-        SELECT * FROM users Order By id Desc limit #{limit} offset  #{offset} 
+        SELECT * FROM users Order By id Desc limit #{offset}, #{limit} 
     </select>
-
+    <select id="GetListCount" resultType="java.lang.Integer"> 
+        SELECT count(1) FROM users 
+    </select>
 </mapper>

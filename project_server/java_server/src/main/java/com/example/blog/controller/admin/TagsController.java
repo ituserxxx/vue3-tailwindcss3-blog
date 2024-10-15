@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.blog.Model.Tags;
 import com.example.blog.common.Result;
+import com.example.blog.dto.IdReq;
 import com.example.blog.dto.tags.AddReq;
 import com.example.blog.dto.tags.UpdateReq;
 import com.example.blog.mapper.TagsMapper;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.el.ELException;
 
 @RestController
 @RequestMapping("admin/tags")
@@ -52,7 +54,10 @@ public class TagsController {
             if (exists) {
                 throw new Exception("名称已存在");
             }
-            result.setData("2222");
+            Tags info = new Tags();
+            info.setName(req.getName());
+            tagsMapper.insert(info);
+            result.setData(info.getId());
         } catch (Exception e) {
             result.setCode(2401);
             result.setMsg(e.getMessage());
@@ -82,6 +87,42 @@ public class TagsController {
                 throw new Exception("更新失败");
             }
 
+        } catch (Exception e) {
+            result.setCode(2401);
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    @PostMapping("/delete")
+    public Result Delete(@Validated @RequestBody IdReq req, BindingResult err) {
+        Result result = new Result();
+        try {
+            if (err.hasErrors()) {
+                throw new Exception(err.getAllErrors().get(0).getDefaultMessage());
+            }
+            int row = tagsMapper.deleteById(req.getId());
+            if (row == 0) {
+                throw new Exception("操作失败~");
+            }
+        } catch (Exception e) {
+            result.setCode(2401);
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+    @PostMapping("/info")
+    public Result Info(@Validated @RequestBody IdReq req,BindingResult err) {
+        Result result = new Result();
+        try {
+            if (err.hasErrors()) {
+                throw new Exception(err.getAllErrors().get(0).getDefaultMessage());
+            }
+            Tags row = tagsMapper.selectById(req.getId());
+            if (row == null) {
+                throw new Exception("操作失败~");
+            }
+            result.setData(row);
         } catch (Exception e) {
             result.setCode(2401);
             result.setMsg(e.getMessage());

@@ -1,19 +1,16 @@
 package com.example.blog.Model;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
 
 @Data
-@TableName("users")
-public class Users {
+@TableName("article_tag_rela")
+public class ArticleTagRela {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String name;
-    private String passwd;
-    private Integer status;
-    private Date createTime;
+    private Integer tagId;
+    private Integer articleId;
 }
