@@ -2,7 +2,7 @@
   <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddDrawer">Add</a-button>
 
   <!-- ------------列表------------- -->
-  <a-table :columns="columns" :data-source="dataSource"  :pagination="pageConfig" @change="handleTableChange">
+  <a-table :columns="columns" :data-source="dataSource" :pagination="pageConfig" @change="handleTableChange">
     <template #headerCell="{ column }">
       {{ column.title }}
     </template>
@@ -19,7 +19,7 @@
       <template v-if="column.dataIndex === 'content'">
         {{ record.content }}
       </template>
-    
+
       <template v-if="column.dataIndex === 'ip'">
         {{ record.ip }}
       </template>
@@ -43,16 +43,16 @@
     @close="closeAddComp" :destroyOnClose="true">
     <AddComp />
   </a-drawer>
- 
+
 
 </template>
 
 <script setup>
-import { ref , watch } from 'vue';
+import { ref, watch } from 'vue';
 import { message } from 'ant-design-vue';
-import { ApiLeaveMessageDelete,ApiLeaveMessageList } from '../../api/leaveMessage.js';
+import { ApiLeaveMessageDelete, ApiLeaveMessageList } from '../../api/leaveMessage.js';
 import AddComp from './add.vue'
- 
+
 
 const pageConfig = ref({
   current: 1,
@@ -62,15 +62,19 @@ const pageConfig = ref({
 })
 const openAdd = ref(false);
 
- 
+
 // 表格列
 const columns = [
   { title: 'id', dataIndex: 'id', },
   { title: 'name', dataIndex: 'name', },
   { title: 'content', dataIndex: 'content', },
   { title: 'ip', dataIndex: 'ip', },
-  { title: 'ip_addr', dataIndex: 'ip_addr', },
-  { title: 'create_time', dataIndex: 'create_time', },
+  { title: 'ipAddr', dataIndex: 'ipAddr', },
+  {
+    title: 'createTime',
+    dataIndex: 'createTime',
+    customRender: (text) => formatDate(text),
+  },
   { title: 'operation', dataIndex: 'operation', },
 ];
 // 表格数据
@@ -83,9 +87,10 @@ const openDelete = async (id) => {
   let data = await ApiLeaveMessageDelete({
     id: id
   });
- 
+
   if (data.code === 0) {
     message.success('This is a success message');
+    renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
   } else {
     message.error(data.data.msg);
   }
@@ -112,7 +117,7 @@ const closeAddComp = () => {
   openAdd.value = false
   renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 }
- 
+
 
 // 渲染表格数据
 const renderTableList = async (page, pageSize) => {
@@ -129,7 +134,17 @@ const renderTableList = async (page, pageSize) => {
 };
 renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 
-
+// 格式化日期的方法
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const yy = String(date.getFullYear()).slice(-2); // 获取年份的后两位
+  const mm = String(date.getMonth() + 1).padStart(2, '0'); // 月份（0-11）
+  const dd = String(date.getDate()).padStart(2, '0'); // 日期
+  const H = String(date.getHours()).padStart(2, '0'); // 小时
+  const i = String(date.getMinutes()).padStart(2, '0'); // 分钟
+  const s = String(date.getSeconds()).padStart(2, '0'); // 秒
+  return `${yy}-${mm}-${dd} ${H}:${i}:${s}`;
+};
 </script>
 
 <style scoped>

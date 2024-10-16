@@ -6,7 +6,7 @@ const request = Axios.create({
     },
     timeout: 60000, // 超时
     // baseURL: `http://${window.location.hostname}:6008/admin` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
-    baseURL: `api/admin` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
+    baseURL: `/api/admin` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
 })
 
 // 请求拦截
