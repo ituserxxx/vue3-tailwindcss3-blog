@@ -1,1 +1,40 @@
-.idea
+
+# 依赖管理文件
+./target/
+**/*.rs.bk
+
+# Rust 编译输出
+Cargo.lock
+
+# IDE/编辑器生成的文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*.DS_Store
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 生成的文档
+/doc/target/
+
+# Rust doc 生成的文件
+/target/doc/
+
+# 各种 OS 生成的临时文件
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# 不需要版本控制的其他文件
+*.pdb
+*.dll
+*.exe
+*.so
+*.dylib
+
+# 你可以在这里添加其他自定义忽略文件或目录
