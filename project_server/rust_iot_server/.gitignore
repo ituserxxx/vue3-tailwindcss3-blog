@@ -1,6 +1,6 @@
 
 # 依赖管理文件
-./target/
+target/
 **/*.rs.bk
 
 # Rust 编译输出
