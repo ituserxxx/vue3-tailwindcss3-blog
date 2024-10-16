@@ -11,7 +11,7 @@ import java.util.Date;
 @TableName("articles")
 public class Articles {
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private int id;
 
     private String title;
 
@@ -21,9 +21,9 @@ public class Articles {
 
     private Date updateTime;
 
-    private Integer status;
+    private int status;
 
-    private Integer commentsSum;
+    private int commentsSum;
 
-    private Integer viewSum;
+    private int viewSum;
 }

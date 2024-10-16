@@ -7,7 +7,7 @@ import com.example.blog.Model.Tags;
 
 @Data
 public class ArticleDetailResp {
-    private Integer id;
+    private int id;
 
     private String title;
 
@@ -17,10 +17,10 @@ public class ArticleDetailResp {
 
     private Date updateTime;
 
-    private Integer status;
-    private Integer commentsSum;
+    private int status;
+    private int commentsSum;
 
-    private Integer viewSum;
+    private int viewSum;
     private Tags[] tagsList;
 
     public void setTagsIdList(Tags[] tt) {

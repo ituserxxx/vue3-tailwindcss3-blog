@@ -39,4 +39,11 @@ public interface TagsMapper extends BaseMapper<Tags> {
                         "</script>"
         })
         public Tags[] GetAllByArticleId(@Param("articleId") Integer articleId);
+
+        @Select({
+                        "<script>",
+                        "SELECT * FROM tags ",
+                        "</script>"
+        })
+        public Tags[] GetAll();
 }

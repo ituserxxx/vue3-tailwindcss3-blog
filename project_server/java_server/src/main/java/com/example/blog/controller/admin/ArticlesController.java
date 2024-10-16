@@ -1,6 +1,5 @@
 package com.example.blog.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.blog.Model.Articles;
 import com.example.blog.common.Result;

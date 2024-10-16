@@ -2,7 +2,7 @@
     <div class="ArticleListComp dark:bg-gray-100 dark:text-gray-900">
 
         <div v-for="article in ViewData.articleList" :key="article.id"
-            class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+            class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md  w-3/5">
             <div class="flex justify-between items-center">
                 <span class="font-light text-gray-600">{{ article.date }}</span>
             </div>
@@ -11,7 +11,7 @@
                 <a class="text-2xl text-gray-700 font-bold hover:underline" :href="`/articleDetail/${article.id}`">
                     {{ article.title }}
                 </a>
-                <p class="mt-2 text-gray-600">{{ article.body }}</p>
+                <!-- <p class="mt-2 text-gray-600">{{ article.body }}</p> -->
             </div>
 
             <div class="flex justify-between items-center mt-4">
@@ -81,5 +81,6 @@ onMounted(() => {
     /* Sets the space between each article item */
     padding: 1rem;
     /* Adjust padding if necessary */
+    /* width: 60%; */
 }
 </style>

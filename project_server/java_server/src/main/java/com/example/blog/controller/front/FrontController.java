@@ -1,5 +1,8 @@
 package com.example.blog.controller.front;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,9 @@ public class FrontController {
     private TagsMapper tagsMapper;
 
     @PostMapping("articles/list")
-    public Result ArticleList(@RequestParam("page") Integer page, @RequestParam("tagId") Integer tagId) {
+    public Result ArticleList(
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "tagId", defaultValue = "0") Integer tagId) {
         Result result = new Result();
         try {
             ArticlesListResp data = new ArticlesListResp();
@@ -39,7 +44,7 @@ public class FrontController {
     }
 
     @PostMapping("articles/detail")
-    public Result ArticleDetail(@RequestParam("id") Integer id) {
+    public Result ArticleDetail(@RequestParam(value = "id", required = true) Integer id) {
         Result result = new Result();
         try {
             ArticleDetailResp data = new ArticleDetailResp();
@@ -52,6 +57,20 @@ public class FrontController {
             data.setUpdateTime(articles.getUpdateTime());
             data.setTagsIdList(tagsMapper.GetAllByArticleId(id));
             result.setData(data);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setCode(9001);
+        }
+        return result;
+    }
+
+    @PostMapping("tags/list")
+    public Result TagsList() {
+        Result result = new Result();
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("list", tagsMapper.GetAll());
+            result.setData(map);
         } catch (Exception e) {
             result.setMsg(e.getMessage());
             result.setCode(9001);

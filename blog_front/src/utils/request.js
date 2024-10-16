@@ -1,14 +1,12 @@
 import Axios from 'axios'
-
+// import { message } from 'ant-design-vue';
 const request = Axios.create({
     headers: {
-        // 'Content-Type': 'application/json'
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type':'application/x-www-form-urlencoded'
     },
     timeout: 60000, // 超时
-    // baseURL: `http://${window.location.hostname}:6008/blog` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
-    baseURL: `http://172.16.9.103:6008/blog` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
-    // baseURL: `api/blog` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
+    // baseURL: `http://${window.location.hostname}:6008/admin` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
+    baseURL: `/api/blog` // 请求接口地址，这里使用本项目地址，因为我们是前后端分离，后面需要在vue.config.js里面配置代理，实际请求得地址不是这个。
 })
 
 // 请求拦截
@@ -28,14 +26,11 @@ request.interceptors.request.use(req => {
 // 响应拦截
 request.interceptors.response.use(
     response => {
+        // console.log(response)
         const res = response
-        // if(res.code !== 0){
-        // Message({
-        //     message: res.msg,
-        //     type: 'error',
-        //     duration: 5 * 1000
-        //   })
-        // return
+        // if (res.data.code !== 0) {
+        //     message.error(res.data.msg);
+        //     return
         // }
         return res.data
     },

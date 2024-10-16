@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class ArticlesListResp {
     private List<Articles> list;
-    private Integer total;
+    private int total;
 }
