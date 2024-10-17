@@ -35,7 +35,7 @@ public class TagsController {
         Result result = new Result();
         Map<String, Object> map = new HashMap<>();
         // List<Tags> list = tagsMapper.selectPage(null, null)
-        map.put("list", tagService.list());
+        map.put("list", tagsMapper.selectList(null));
         result.setData(map);
         return result;
     }
