@@ -21,6 +21,7 @@ public class Articles {
 
     private Date updateTime;
 
+    // 	状态：1发布，2草稿，3删除	
     private int status;
 
     private int commentsSum;

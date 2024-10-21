@@ -51,6 +51,7 @@
 import { ref, watch } from 'vue';
 import { message } from 'ant-design-vue';
 import { ApiLeaveMessageDelete, ApiLeaveMessageList } from '../../api/leaveMessage.js';
+import diyfunc from '../../utils/diyfunc.js';
 import AddComp from './add.vue'
 
 
@@ -73,7 +74,7 @@ const columns = [
   {
     title: 'createTime',
     dataIndex: 'createTime',
-    customRender: (text) => formatDate(text),
+    customRender: (text) => diyfunc.formatDate(text),
   },
   { title: 'operation', dataIndex: 'operation', },
 ];
@@ -114,7 +115,7 @@ watch(pageConfig, (newValue, oldValue) => {
 // 重置新增抽屉
 const closeAddComp = () => {
   console.log(" closeAddComp  ")
-  openAdd.value = false
+  openAdd.value = false;
   renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 }
 
@@ -134,17 +135,7 @@ const renderTableList = async (page, pageSize) => {
 };
 renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 
-// 格式化日期的方法
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const yy = String(date.getFullYear()).slice(-2); // 获取年份的后两位
-  const mm = String(date.getMonth() + 1).padStart(2, '0'); // 月份（0-11）
-  const dd = String(date.getDate()).padStart(2, '0'); // 日期
-  const H = String(date.getHours()).padStart(2, '0'); // 小时
-  const i = String(date.getMinutes()).padStart(2, '0'); // 分钟
-  const s = String(date.getSeconds()).padStart(2, '0'); // 秒
-  return `${yy}-${mm}-${dd} ${H}:${i}:${s}`;
-};
+
 </script>
 
 <style scoped>

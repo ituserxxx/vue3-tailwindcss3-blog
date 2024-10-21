@@ -15,7 +15,9 @@ export function ApiArticlesInfo(data) {
 export function ApiArticlesUpdate(data) {
     return http.post('/articles/update', data)
 }
-
+export function ApiArticlesChangeStatus(data) {
+    return http.post('/articles/changeStatus', data)
+}
 export function ApiArticlesDelete(data) {
     return http.post('/articles/delete', data)
 }

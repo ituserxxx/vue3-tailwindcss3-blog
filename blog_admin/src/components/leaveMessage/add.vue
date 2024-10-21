@@ -8,7 +8,7 @@
     <a-form-item label="Content" name="content">
       <a-input v-model:value="formState.content" />
     </a-form-item>
- 
+
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary" @click="onSubmit">Create</a-button>
     </a-form-item>
@@ -17,6 +17,7 @@
 </template>
 <script setup>
 import { reactive, ref } from 'vue';
+import { message } from 'ant-design-vue';
 import { ApiLeaveMessageAdd } from '../../api/leaveMessage.js';
 const formRef = ref();
 const labelCol = {
@@ -50,7 +51,7 @@ const rules = {
       trigger: 'change',
     },
     {
-      min: 6,
+      min: 4,
       max: 200,
       message: 'Length should be than 6 character',
       trigger: 'blur',
@@ -61,14 +62,12 @@ const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      console.log(" form data", formState)
-      // console.log('values', formState, toRaw(formState));
       let data = await ApiLeaveMessageAdd(formState);
-      console.log(" resp data", data.data)
+      console.log(data);
       if (data.code === 0) {
         message.success('success');
       } else {
-        message.error(data.data.msg);
+        message.error(data.msg);
       }
     })
     .catch(error => {

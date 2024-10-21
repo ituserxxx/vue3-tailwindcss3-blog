@@ -7,6 +7,7 @@ import com.example.blog.dto.ArticleDetailResp;
 import com.example.blog.dto.IdReq;
 import com.example.blog.dto.PageReq;
 import com.example.blog.dto.articles.AddReq;
+import com.example.blog.dto.articles.ChangeStatusReq;
 import com.example.blog.dto.articles.InfoResp;
 import com.example.blog.dto.articles.ListResp;
 import com.example.blog.dto.articles.UpdateReq;
@@ -151,7 +152,6 @@ public class ArticlesController {
         } catch (Exception e) {
             result.setCode(2400);
             result.setMsg(e.getMessage());
-
         }
         return result;
     }
@@ -176,6 +176,27 @@ public class ArticlesController {
             data.setTitle(row.getTitle());
             data.setTagsIdList(tagsMapper.GetListByArticleId(req.getId()));
             result.setData(data);
+        } catch (Exception e) {
+            result.setCode(2300);
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    @PostMapping("changeStatus")
+    public Result ChangeStatus(@Validated @RequestBody ChangeStatusReq req, BindingResult err) {
+        Result result = new Result();
+        try {
+            if (err.hasErrors()) {
+                throw new Exception(err.getAllErrors().get(0).getDefaultMessage());
+            }
+            UpdateWrapper updateWrapper = new UpdateWrapper<>();
+            updateWrapper.in("id", req.getId());
+            updateWrapper.set("status", req.getStatus());
+            int row = articlesMapper.update(null, updateWrapper);
+            if (row == 0) {
+                throw new Exception("更新状态失败~~");
+            }
         } catch (Exception e) {
             result.setCode(2300);
             result.setMsg(e.getMessage());

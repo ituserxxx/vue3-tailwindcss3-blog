@@ -1,6 +1,5 @@
 package com.example.blog.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.blog.Model.LeaveMessages;
 import com.example.blog.mapper.LeaveMessagesMapper;
 import org.springframework.beans.factory.annotation.Autowired;

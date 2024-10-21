@@ -7,10 +7,10 @@
       {{ column.title }}
     </template>
 
-    <template #bodyCell="{ column, record }">
+    <template #bodyCell="{ column, record, index }">
 
       <template v-if="column.dataIndex === 'status'">
-        <a-switch :checked="record.status === 1" @change="(checked) => handleStatusChange(checked, record.id)" />
+        <a-switch :checked="record.status === 1" @change="(checked) => handleStatusChange(checked, record.id, index)" />
       </template>
 
       <template v-else-if="column.dataIndex === 'operation'">
@@ -41,8 +41,8 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { message } from 'ant-design-vue';
-import { ApiArticlesList, ApiArticlesDelete } from '../../api/articles.js';
-
+import { ApiArticlesList, ApiArticlesDelete, ApiArticlesChangeStatus } from '../../api/articles.js';
+import diyfunc from '../../utils/diyfunc.js';
 import AddComp from './add.vue'
 import EditComp from './edit.vue'
 
@@ -65,8 +65,8 @@ const columns = [
   // { title: 'content', dataIndex: 'content', },
   { title: 'commentsSum', dataIndex: 'commentsSum', },
   { title: 'viewSum', dataIndex: 'viewSum', },
-  { title: 'createTime', dataIndex: 'createTime', },
-  { title: 'updateTime', dataIndex: 'updateTime', },
+  { title: 'createTime', dataIndex: 'createTime', customRender: (text) => diyfunc.formatDate(text), },
+  { title: 'updateTime', dataIndex: 'updateTime', customRender: (text) => diyfunc.formatDate(text), },
   { title: 'status', dataIndex: 'status', },
   { title: 'operation', dataIndex: 'operation', },
 ];
@@ -137,9 +137,18 @@ const renderTableList = async (page, pageSize) => {
 renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 
 // 单元格开关操作
-const handleStatusChange = (checked, id) => {
+const handleStatusChange = async (checked, id, index) => {
   // 更新 record.status，根据开关状态进行更新
-  console.log(`id= ${id}   checked= ${checked}`);
+  console.log(`id= ${id}   checked= ${checked},  index=${index}`);
+  //1发布，2草稿
+  let data = await ApiArticlesChangeStatus({
+    id: id,
+    status: checked ? 1 : 2,
+  });
+  if (data.code == 0) {
+    dataSource.value[index].status = checked ? 1 : 0;
+    message.success('success');
+  }
 };
 
 </script>
