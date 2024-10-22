@@ -48,7 +48,7 @@ import EditComp from './edit.vue'
 
 import { useStore } from 'vuex';
 const store = useStore();
-console.log("uid===>", store.state.uid)
+console.log("qg===>", store.state.uid)
 const pageConfig = ref({
   current: 1,
   pageSize: 10,
