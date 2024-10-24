@@ -33,7 +33,7 @@ public interface ArticlesMapper extends BaseMapper<Articles> {
                         "</if>",
                         "WHERE at.id >0 ",
                         "<if test='tagId > 0'>",
-                        "atr.tag_id = #{tagId}",
+                        "and atr.tag_id = #{tagId}",
                         "</if>",
                         "ORDER BY at.id DESC LIMIT #{offset},#{limit}",
                         "</script>"
@@ -49,7 +49,7 @@ public interface ArticlesMapper extends BaseMapper<Articles> {
                         "</if>",
                         "WHERE at.id >0 ",
                         "<if test='tagId > 0'>",
-                        "atr.tag_id = #{tagId}",
+                        "and atr.tag_id = #{tagId}",
                         "</if>",
                         "</script>"
         })

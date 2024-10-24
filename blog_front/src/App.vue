@@ -32,7 +32,7 @@ export default {
 /* Ensure FooterComp is fixed at the bottom */
 .FooterComp {
   position: relative;
-  bottom: 0;
+  bottom: -10;
   left: 0;
   right: 0;
   z-index: 10;

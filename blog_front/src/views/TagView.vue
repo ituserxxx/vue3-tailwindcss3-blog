@@ -12,7 +12,7 @@
   </div>
 
   <div class="content pt-16 pb-16 bg-white shadow">
-    <ArticleListComp :currentTagId="ViewData.currentTagId" />
+    <ArticleListComp v-if="ViewData.currentTagId > 0" :currentTagId="ViewData.currentTagId" />
   </div>
 </template>
 <script setup>

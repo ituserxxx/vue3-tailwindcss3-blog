@@ -19,7 +19,7 @@
             </div>
         </div>
         <!-- 页码 -->
-        <PageComp :currPage="ViewData.currPage" :total="ViewData.total" @update:currPage="handlePageChange" />
+        <PageComp v-if="ViewData.currPage > 1" :currPage="ViewData.currPage" :total="ViewData.total" @update:currPage="handlePageChange" />
     </div>
 </template>
 <script setup>
