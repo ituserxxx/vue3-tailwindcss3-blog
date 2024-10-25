@@ -58,11 +58,11 @@
 
 <script setup>
 import { defineProps, ref, onMounted } from 'vue';
-
-import 'highlight.js/styles/panda-syntax-dark.css'
+import 'highlight.js/styles/monokai.css';
+// import 'highlight.js/styles/panda-syntax-dark.css'
 import Markdown from 'vue3-markdown-it';
 import { articleDetailApi } from '../api/blog';
-import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
+// import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
 const props = defineProps({
     articleId: String,
 });
