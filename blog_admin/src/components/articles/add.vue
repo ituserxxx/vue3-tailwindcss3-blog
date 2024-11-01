@@ -42,16 +42,7 @@ import { ApiArticlesAdd } from '../../api/articles.js';
 import { ApiTagsList } from '../../api/tags.js';
 const formRef = ref();
 const selectedValues = ref(); // 存储选中的复选框值
-const tagsList = ref([
-  // { id: 1, name: 'A' },
-  // { id: 2, name: 'B' },
-  // { id: 3, name: 'C' },
-  // { id: 4, name: 'C' },
-  // { id: 5, name: 'C' },
-  // { id: 6, name: 'C' },
-  // { id: 7, name: 'C' },
-  // { id: 8, name: 'C' },
-]);
+const tagsList = ref([]);
 const formState = reactive({
   title: '',
   content: '',

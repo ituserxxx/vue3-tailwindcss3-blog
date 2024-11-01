@@ -411,7 +411,7 @@ function articleDetail() {
 }
 function articleList() {
   return {
-    articleList: [
+    list: [
       {
         id: 1,
         date: 'Jun 1, 2024',
