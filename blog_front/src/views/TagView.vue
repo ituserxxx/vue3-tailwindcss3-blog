@@ -1,9 +1,9 @@
 <template>
 
-  <div class="tag">
-    <ul class="flex mx-auto justify-center flex-wrap max-w-xl gap-6 leading-8 p-5">
+  <div class="tag" >
+    <ul class="flex mx-auto justify-center flex-wrap max-w-xl gap-6 leading-8 p-5 " >
       <li v-for="(tag, index) in ViewData.tagList" :key="index">
-        <a :href="`/tag/${tag.id}`" :class="tag.className" class="text-gray-800 hover:underline"
+        <a :href="`/tag/${tag.id}`" :class="tag.className" class="text-gray-800 hover:underline" 
           @click.prevent="updateCurrentTagId(tag.id)">
           {{ tag.name }}
         </a>
@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <div class="content pt-16 pb-16 bg-white shadow">
+  <div class="content pt-16 pb-16 bg-white ">
     <ArticleListComp v-if="ViewData.currentTagId > 0" :currentTagId="ViewData.currentTagId" />
   </div>
 </template>
@@ -27,7 +27,7 @@ const router = useRouter();
 const ViewData = ref({
   currentTagId: Number(route.params.tagId),
   tagList: [],
-  sizes: ['text-xs', 'text-sm', 'text-md', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl'],
+  sizes: ['text-3xl', 'text-4xl', 'text-5xl', 'text-6xl', 'text-6xl', 'text-5xl', 'text-4xl', 'text-3xl'],
   colors: ['text-cyan-500', 'text-teal-500', 'text-red-500', 'text-green-500', 'text-orange-500', 'text-blue-500', 'text-indigo-500', 'text-gray-500'],
 })
 
@@ -57,6 +57,7 @@ onMounted(() => {
   renderTagList();
 });
 function getRandomClass() {
+  // 随机大小和尺寸
   const size = ViewData.value.sizes[Math.floor(Math.random() * ViewData.value.sizes.length)];
   const color = ViewData.value.colors[Math.floor(Math.random() * ViewData.value.colors.length)];
   return `${size} ${color}`;

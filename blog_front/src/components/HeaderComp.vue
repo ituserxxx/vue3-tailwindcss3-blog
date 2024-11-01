@@ -55,11 +55,11 @@
 <script setup>
 import {  ref } from 'vue';
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'LeaveMessage', href: '/leaveMessage' },
-  { name: 'Tag', href: '/tag' },
-  { name: 'Shoot', href: '/shoot' },
-  { name: 'About', href: '/about' },
+  { name: '首页', href: '/' },
+  { name: '留言板', href: '/leaveMessage' },
+  { name: '标签', href: '/tag' },
+  { name: '相册', href: '/shoot' },
+  { name: '关于', href: '/about' },
 ];
 const currentBgColor = ref(window.location.pathname);
 
@@ -71,10 +71,9 @@ function updatePage(href) {
 <style scoped>
 
 /* Add any additional styles here if needed */
-.HeaderComp {
+/* .HeaderComp {
   height: 60px;
-  /* Adjust height if needed */
-}
+} */
 a.bg-gray-200 {
   background-color: #e2e8f0; /* Light gray background for selected item */
 }

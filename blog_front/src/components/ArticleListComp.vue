@@ -32,7 +32,7 @@ const props = defineProps({
 const ViewData = ref({
     currentTagId: Number(props.currentTagId == undefined ? 0 : props.currentTagId),
     currPage: 1,
-    total: 10,
+    total: 2,
     articleList: []
 });
 watch(() => props.currentTagId, (newId) => {

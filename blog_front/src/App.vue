@@ -1,11 +1,15 @@
 <template>
-  
-    <HeaderComp />
-    <div class="content">
+  <div class="flex flex-col min-h-screen">
+
+    <header class="bg-gray-200 py-4">
+      <HeaderComp />
+    </header>
+    <main class="flex-grow">
       <RouterView />
-    </div>
+    </main>
     <FooterComp />
-   
+  </div>
+
 </template>
 <script>
 import { RouterView } from 'vue-router'
@@ -19,26 +23,4 @@ export default {
 }
 </script>
 
-<style scoped>
-/* Ensure HeaderComp is fixed and not overlapping content */
-.HeaderComp {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
-/* Ensure FooterComp is fixed at the bottom */
-.FooterComp {
-  position: relative;
-  bottom: -10;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-.content {
-  margin-top: 4rem; /* Adjust top margin based on HeaderComp height */
-  margin-bottom: 4rem; /* Adjust bottom margin based on FooterComp height */
-}
-</style>
+<style scoped></style>

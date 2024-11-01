@@ -35,7 +35,8 @@
                     </div>
                     <hr>
                     <!-- content -->
-                    <Markdown :source="ViewData.content" />
+                    <!-- <Markdown :source="ViewData.content" /> -->
+                    <div v-html="renderedMarkdown"></div>
                     <!-- tagsList -->
                     <div class="flex flex-wrap gap-2">
                         <a v-for="(tag, index) in ViewData.tagsList" :key="index" :href="`/tag/${tag.id}`"
@@ -57,10 +58,20 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted } from 'vue';
+import { defineProps, ref, onMounted,computed } from 'vue';
 import 'highlight.js/styles/monokai.css';
-// import 'highlight.js/styles/panda-syntax-dark.css'
-import Markdown from 'vue3-markdown-it';
+import 'highlight.js/styles/panda-syntax-dark.css'
+import hljs from 'highlight.js';
+import { marked } from 'marked';
+
+// 配置 marked 使用 highlight.js
+marked.setOptions({
+  highlight: function(code, language) {
+    const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+    return hljs.highlight(validLanguage, code).value;
+  },
+  langPrefix: 'hljs', // 确保类名前缀与 highlight.js 默认的相匹配
+});
 import { articleDetailApi } from '../api/blog';
 // import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
 const props = defineProps({
@@ -91,6 +102,7 @@ const renderArticleDetail = async () => {
         ViewData.value.title = data.title
         ViewData.value.content = data.content
         ViewData.value.tagsList = data.tagsList
+
     } catch (error) {
         console.error('Error fetching the list:', error);
     }
@@ -98,6 +110,13 @@ const renderArticleDetail = async () => {
 onMounted(() => {
     renderArticleDetail();
 });
+const renderedMarkdown = computed(() => {
+  return marked(ViewData.value.content);
+});
 
 </script>
-<style scoped></style>
+
+<style scoped>
+/* 引入 highlight.js 的样式 */
+@import 'highlight.js/styles/monokai.css';
+</style>

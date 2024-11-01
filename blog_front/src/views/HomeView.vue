@@ -1,5 +1,5 @@
 <template>
-  <div class="content pt-16 pb-16 bg-white shadow">
+  <div class="content pt-16 pb-16 bg-white ">
     <ArticleListComp />
   </div>
 </template>
