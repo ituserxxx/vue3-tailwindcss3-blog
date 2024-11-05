@@ -35,7 +35,6 @@
                     </div>
                     <hr>
                     <!-- content -->
-                    <!-- <Markdown :source="ViewData.content" /> -->
                     <div v-html="renderedMarkdown"></div>
                     <!-- tagsList -->
                     <div class="flex flex-wrap gap-2">
@@ -58,21 +57,23 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted,computed } from 'vue';
-import 'highlight.js/styles/monokai.css';
-import 'highlight.js/styles/panda-syntax-dark.css'
-import hljs from 'highlight.js';
-import { marked } from 'marked';
-
-// 配置 marked 使用 highlight.js
-marked.setOptions({
-  highlight: function(code, language) {
-    const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
-    return hljs.highlight(validLanguage, code).value;
-  },
-  langPrefix: 'hljs', // 确保类名前缀与 highlight.js 默认的相匹配
-});
 import { articleDetailApi } from '../api/blog';
+import { defineProps, ref, onMounted, nextTick } from 'vue';
+import { marked } from 'marked';        // 导入 marked 库
+import hljs from 'highlight.js';        // 导入 highlight.js
+import 'highlight.js/styles/monokai.css'; // 可选择不同的高亮样式
+
+// 配置 marked 解析 Markdown 时使用 highlight.js 来高亮代码
+marked.setOptions({
+    highlight: function (code, language) {
+        const validLang = hljs.getLanguage(language) ? language : 'plaintext';
+        // const validLang = 'monokai';
+        return hljs.highlight(code, { language: validLang }).value;
+    },
+});
+const markdownContent = ref('# Example Markdown\n```javascript\nconst a = 1;\nconsole.log(a);\n```');
+const renderedMarkdown = ref('');
+
 // import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
 const props = defineProps({
     articleId: String,
@@ -85,6 +86,11 @@ const ViewData = ref({
     content: "",
     tagsList: []
 });
+onMounted(() => {
+    renderArticleDetail();
+    renderedMarkdown.value = marked(markdownContent);
+});
+
 const renderArticleDetail = async () => {
     try {
         let data = await articleDetailApi({
@@ -102,21 +108,19 @@ const renderArticleDetail = async () => {
         ViewData.value.title = data.title
         ViewData.value.content = data.content
         ViewData.value.tagsList = data.tagsList
+        // 使用 marked 解析 Markdown 内容为 HTML
+        // renderedMarkdown.value = marked(data.content);
 
     } catch (error) {
         console.error('Error fetching the list:', error);
     }
 };
-onMounted(() => {
-    renderArticleDetail();
-});
-const renderedMarkdown = computed(() => {
-  return marked(ViewData.value.content);
-});
+
 
 </script>
 
 <style scoped>
-/* 引入 highlight.js 的样式 */
+/* 引入 highlight.js 的样式
 @import 'highlight.js/styles/monokai.css';
+@import 'highlight.js/styles/github.css'; */
 </style>
