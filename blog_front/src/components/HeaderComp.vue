@@ -1,5 +1,5 @@
 <template>
-  <div class="HeaderComp fixed top-0 inset-x-0 shadow z-10   bg-white dark:bg-gray-800 dark:text-gray-100">
+  <div class="HeaderComp fixed top-0 inset-x-0 shadow z-10   bg-white dark:bg-gray-800 dark:text-gray-100 h-18 py-2">
 
     <div class="container mx-auto flex items-center justify-between h-full px-4">
 
@@ -23,12 +23,12 @@
 
       <div class="lg:flex lg:gap-x-12  ">
         <a v-for="item in navigation" :key="item.name" :href="item.href"
-        :class="{'bg-gray-200 dark:bg-gray-700': currentBgColor === item.href, 'font-semibold leading-6 text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300': true}"
-           @click="updatePage(item.href)">
+          :class="{ 'bg-blue-500 text-white dark:bg-blue-900 dark:text-gray-200': currentBgColor === item.href, 'font-semibold leading-6 text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300 text-2xl': true }"
+          @click="updatePage(item.href)">
           {{ item.name }}
         </a>
       </div>
-       
+
 
       <div class="w-full max-w-sm min-w-[200px]">
         <div class="relative">
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import {  ref } from 'vue';
+import { ref } from 'vue';
 const navigation = [
   { name: '首页', href: '/' },
   { name: '留言板', href: '/leaveMessage' },
@@ -69,15 +69,17 @@ function updatePage(href) {
 </script>
 
 <style scoped>
-
 /* Add any additional styles here if needed */
 /* .HeaderComp {
   height: 60px;
 } */
 a.bg-gray-200 {
-  background-color: #e2e8f0; /* Light gray background for selected item */
+  background-color: #e2e8f0;
+  /* Light gray background for selected item */
 }
+
 a.dark\:bg-gray-700 {
-  background-color: #c4cbd9; /* Dark gray background for selected item in dark mode */
+  background-color: #c4cbd9;
+  /* Dark gray background for selected item in dark mode */
 }
 </style>

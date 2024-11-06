@@ -18,7 +18,7 @@ const router = createRouter({
       path: '/tag/:tagId?',
       name: 'tag',
       component: () => import('../views/TagView.vue'),
-      
+
     },
     {
       path: '/leaveMessage',

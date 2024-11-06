@@ -1,9 +1,9 @@
 <template>
 
-  <div class="tag" >
-    <ul class="flex mx-auto justify-center flex-wrap max-w-xl gap-6 leading-8 p-5 " >
+  <div class="tag">
+    <ul class="flex mx-auto justify-center flex-wrap max-w-xl gap-6 leading-8 p-8 ">
       <li v-for="(tag, index) in ViewData.tagList" :key="index">
-        <a :href="`/tag/${tag.id}`" :class="tag.className" class="text-gray-800 hover:underline" 
+        <a :href="`/tag/${tag.id}`" :class="tag.className" class="text-gray-800 hover:underline"
           @click.prevent="updateCurrentTagId(tag.id)">
           {{ tag.name }}
         </a>

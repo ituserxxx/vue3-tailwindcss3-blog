@@ -1,5 +1,5 @@
 <template>
-    <div class="relative p-4">
+    <div class="relative p-8">
         <div class="max-w-3xl mx-auto">
             <div
                 class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">

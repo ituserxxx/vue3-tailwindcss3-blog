@@ -1,1 +1,1 @@
-1
+gin 文档 https://gin-gonic.com/zh-cn/docs/quickstart/
