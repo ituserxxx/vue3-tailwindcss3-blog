@@ -19,7 +19,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <span class="ml-1">{{ ViewData.date }}</span>
+                            <span class="ml-1">{{ ViewData.createTime }}</span>
                         </span>
 
                         <a href="#" class="flex flex-row items-center hover:text-indigo-600  mr-3">
@@ -35,7 +35,7 @@
                     </div>
                     <hr>
                     <!-- content -->
-                    <div v-html="renderedMarkdown"></div>
+                    <MdPreview :modelValue="ViewData.content" />
                     <!-- tagsList -->
                     <div class="flex flex-wrap gap-2">
                         <a v-for="(tag, index) in ViewData.tagsList" :key="index" :href="`/tag/${tag.id}`"
@@ -57,22 +57,11 @@
 </template>
 
 <script setup>
+import { defineProps, ref, onMounted } from 'vue';
+import { MdPreview, MdCatalog } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
+import 'md-editor-v3/lib/style.css';
 import { articleDetailApi } from '../api/blog';
-import { defineProps, ref, onMounted, nextTick } from 'vue';
-import { marked } from 'marked';        // 导入 marked 库
-import hljs from 'highlight.js';        // 导入 highlight.js
-import 'highlight.js/styles/monokai.css'; // 可选择不同的高亮样式
-
-// 配置 marked 解析 Markdown 时使用 highlight.js 来高亮代码
-marked.setOptions({
-    highlight: function (code, language) {
-        const validLang = hljs.getLanguage(language) ? language : 'plaintext';
-        // const validLang = 'monokai';
-        return hljs.highlight(code, { language: validLang }).value;
-    },
-});
-const markdownContent = ref('# Example Markdown\n```javascript\nconst a = 1;\nconsole.log(a);\n```');
-const renderedMarkdown = ref('');
 
 // import ArticleRecommendComp from '../components/ArticleRecommendComp.vue'
 const props = defineProps({
@@ -80,7 +69,7 @@ const props = defineProps({
 });
 const ViewData = ref({
     id: 0,
-    date: "",
+    createTime: "",
     viewSum: 0,
     title: "",
     content: "",
@@ -88,7 +77,6 @@ const ViewData = ref({
 });
 onMounted(() => {
     renderArticleDetail();
-    renderedMarkdown.value = marked(markdownContent);
 });
 
 const renderArticleDetail = async () => {
@@ -103,14 +91,11 @@ const renderArticleDetail = async () => {
         data = data.data;
 
         ViewData.value.id = data.id
-        ViewData.value.date = data.date
+        ViewData.value.createTime = data.createTime
         ViewData.value.viewSum = data.viewSum
         ViewData.value.title = data.title
         ViewData.value.content = data.content
         ViewData.value.tagsList = data.tagsList
-        // 使用 marked 解析 Markdown 内容为 HTML
-        // renderedMarkdown.value = marked(data.content);
-
     } catch (error) {
         console.error('Error fetching the list:', error);
     }
@@ -119,8 +104,8 @@ const renderArticleDetail = async () => {
 
 </script>
 
-<style scoped>
-/* 引入 highlight.js 的样式
-@import 'highlight.js/styles/monokai.css';
-@import 'highlight.js/styles/github.css'; */
+<style>
+/* 引入 highlight.js 的样式*/
+/* @import 'highlight.js/styles/monokai.css';
+@import 'highlight.js/styles/github.css';  */
 </style>
