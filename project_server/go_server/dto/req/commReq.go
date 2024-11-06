@@ -1,4 +1,4 @@
-
+package req
 
 type PageReq struct {
 	Page int `form:"page" json:"page" default:"1"`
