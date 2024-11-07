@@ -3,7 +3,7 @@ package middleware
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"go_server/dto/resp"
+	"go_server/dto"
 	"go_server/my_tools"
 )
 
@@ -12,7 +12,7 @@ func Jwt() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("Authorization")
 		if token == "" {
-			resp.ReturnRes.Err(c, 10002, "请求未携带token，无权限访问")
+			dto.ReturnRes.Err(c, 10002, "请求未携带token，无权限访问")
 			c.Abort()
 			return
 		}
@@ -24,11 +24,11 @@ func Jwt() gin.HandlerFunc {
 		claims, err := j.ParseToken(token)
 		if err != nil {
 			if errors.Is(err, my_tools.TokenExpired) {
-				resp.ReturnRes.Err(c, 10002, "授权已过期")
+				dto.ReturnRes.Err(c, 10002, "授权已过期")
 				c.Abort()
 				return
 			}
-			resp.ReturnRes.Err(c, 10002, err.Error())
+			dto.ReturnRes.Err(c, 10002, err.Error())
 			c.Abort()
 			return
 		}

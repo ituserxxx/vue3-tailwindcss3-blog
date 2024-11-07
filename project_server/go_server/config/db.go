@@ -11,7 +11,7 @@ import (
 
 var Dao *gorm.DB
 
-func Init() {
+func DBInit() {
 	dbLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
 		logger.Config{

@@ -2,9 +2,9 @@ package model
 
 // ArticleTagRela represents the article_tag_rela table in the database
 type ArticleTagRela struct {
-	ID        int `gorm:"primaryKey;autoIncrement"` // 主键，自增
-	TagID     int `gorm:"not null"`                 // 标签ID，非空
-	ArticleID int `gorm:"not null"`                 // 文章ID，非空
+	ID        uint `gorm:"primaryKey;autoIncrement"` // 主键，自增
+	TagID     uint `gorm:"not null"`                 // 标签ID，非空
+	ArticleID uint `gorm:"not null"`                 // 文章ID，非空
 }
 
 // TableName overrides the default table name

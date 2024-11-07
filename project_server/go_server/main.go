@@ -16,8 +16,8 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file", err)
 	}
-	// 加载数据库
-	Config.Init()
+	// 加载组件
+	Config.RunModuleServer()
 	println(os.Getenv("Mysql"))
 
 	// 加载路由

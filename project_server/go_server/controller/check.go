@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"go_server/dto/resp"
+	"go_server/dto"
 )
 
 type check struct {
@@ -11,5 +11,5 @@ type check struct {
 var Check = &check{}
 
 func (check) Info(c *gin.Context) {
-	resp.ReturnRes.Succ(c, "v1")
+	dto.ReturnRes.Succ(c, "v1")
 }
