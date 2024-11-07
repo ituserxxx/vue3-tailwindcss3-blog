@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"go_server/db"
+	Config "go_server/config"
 	"go_server/router"
 	"log"
 	"os"
@@ -17,7 +17,7 @@ func main() {
 		log.Fatal("Error loading .env file", err)
 	}
 	// 加载数据库
-	db.Init()
+	Config.Init()
 	println(os.Getenv("Mysql"))
 
 	// 加载路由
