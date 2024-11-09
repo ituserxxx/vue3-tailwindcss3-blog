@@ -63,7 +63,6 @@ func (articles) Add(c *gin.Context) {
 		return
 	}
 	dto.ReturnRes.Succ(c, id)
-
 }
 func (articles) Update(c *gin.Context) {
 	var params dto.ArticleUpdateReq
