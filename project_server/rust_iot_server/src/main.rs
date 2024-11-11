@@ -13,6 +13,11 @@ use crate::{
 
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::fmt()
+    .with_max_level(tracing::Level::DEBUG)
+    .with_test_writer()
+    .init();
+
     let app = Router::new()
         .route("/get", get(demo::get))
         .route("/post", post(demo::post));
