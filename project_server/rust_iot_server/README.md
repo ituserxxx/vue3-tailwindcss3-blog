@@ -1,8 +1,12 @@
-axum doc 
+rust中文文档
 ```
-https://docs.rs/axum/latest/axum/index.html
+https://doc.yonyoucloud.com/doc/wiki/project/rust/error-handling.html
 ```
 
+axum doc 
+```
+https://docs.rs/axum/latest/axum/
+```
 
 init project 
 ```
