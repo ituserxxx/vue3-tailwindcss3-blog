@@ -1,13 +1,21 @@
 [package]
 name = "rust_iot_server"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [".", "entity"]
+ 
+
 
 [dependencies]
 axum = "0.7.7"
+sea-orm = { version = "^1.1.1",  features = [ "sqlx-mysql", "runtime-tokio-rustls", "macros","debug-print" ] }
 tokio = { version = "1.4.0", features = ["full"] }
 serde={version="1.0.210", features = ["derive"] }
-tracing-subscriber={version="0.3.18"}
-sea-orm = { version = "1.1.0", features = [ "sqlx-mysql", "tokio", "macros" ] }
+dotenv = "0.15"
+entity = { path = "entity",version="0.0.1" }
+log = "0.4"
+tracing-subscriber = "0.3"
+tracing = "0.1"

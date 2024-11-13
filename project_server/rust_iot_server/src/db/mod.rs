@@ -1,17 +1,21 @@
+use sea_orm::{Database, DbErr,ConnectOptions};
+use tokio::time::Duration;
 
-let mut opt = ConnectOptions::new("mysql://blog:blogmima@172.16.9.103:6001/blog");
+use std::env;
 
-opt.max_connections(100)
+pub async fn init() -> Result<(), DbErr> {
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let mut opt = ConnectOptions::new(&database_url);
+    opt.max_connections(100)
     .min_connections(5)
     .connect_timeout(Duration::from_secs(8))
     .acquire_timeout(Duration::from_secs(8))
     .idle_timeout(Duration::from_secs(8))
     .max_lifetime(Duration::from_secs(8))
     .sqlx_logging(true)
-    .sqlx_logging_level(log::LevelFilter::Info)
-    .set_schema_search_path("my_schema"); // Setting default PostgreSQL schema
+    .sqlx_logging_level(log::LevelFilter::Debug);
+    let _db = Database::connect(opt).await?;
+ 
+    Ok(())
+}
 
-let db = Database::connect(opt).await?;
-
-// Closing connection here
-db.close().await?;
