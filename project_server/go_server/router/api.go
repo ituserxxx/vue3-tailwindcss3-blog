@@ -8,6 +8,12 @@ import (
 func Init(r *gin.Engine) {
 	r.GET("api/check", controller.Check.Info)
 
+	r.POST("blog/articles/list", controller.Blog.ArticlesList)
+	r.POST("blog/articles/detail", controller.Blog.ArticlesDetail)
+	r.POST("blog/tags/list", controller.Blog.TagsList)
+	r.POST("blog/leaveMessages/list", controller.Blog.LeaveMessagesList)
+	r.POST("blog/leaveMessages/add", controller.Blog.LeaveMessagesAdd)
+
 	r.POST("admin/users/login", controller.Users.Login)
 	r.POST("admin/users/add", controller.Users.Add)
 	r.POST("admin/users/info", controller.Users.Info)

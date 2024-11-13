@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	Config "go_server/config"
@@ -23,7 +24,7 @@ func main() {
 	// 加载路由
 	router.Init(r)
 
-	err = r.Run(":6008")
+	err = r.Run(fmt.Sprintf(":%s", os.Getenv("ServerPort")))
 	if err != nil {
 		return
 	}
