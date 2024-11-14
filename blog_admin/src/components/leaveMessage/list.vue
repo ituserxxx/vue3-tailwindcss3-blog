@@ -1,6 +1,4 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="openAddDrawer">Add</a-button>
-
   <!-- ------------列表------------- -->
   <a-table :columns="columns" :data-source="dataSource" :pagination="pageConfig" @change="handleTableChange">
     <template #headerCell="{ column }">
@@ -36,14 +34,7 @@
       </template>
     </template>
   </a-table>
-
-  <!-- ------------新增抽屉------------- -->
-  <a-drawer v-model:open="openAdd" class="custom-class" root-class-name="root-class-name"
-    :root-style="{ color: 'blue' }" style="color: red" width="35%" title=" Add LeaveMessage" placement="right"
-    @close="closeAddComp" :destroyOnClose="true">
-    <AddComp />
-  </a-drawer>
-
+ 
 
 </template>
 
@@ -52,8 +43,6 @@ import { ref, watch } from 'vue';
 import { message } from 'ant-design-vue';
 import { ApiLeaveMessageDelete, ApiLeaveMessageList } from '../../api/leaveMessage.js';
 import diyfunc from '../../utils/diyfunc.js';
-import AddComp from './add.vue'
-
 
 const pageConfig = ref({
   current: 1,
@@ -61,8 +50,6 @@ const pageConfig = ref({
   total: 50,
   position: ["bottomLeft"],
 })
-const openAdd = ref(false);
-
 
 // 表格列
 const columns = [
@@ -80,9 +67,6 @@ const columns = [
 ];
 // 表格数据
 const dataSource = ref([]);
-const openAddDrawer = () => {
-  openAdd.value = true;
-};
 
 const openDelete = async (id) => {
   let data = await ApiLeaveMessageDelete({
@@ -110,14 +94,6 @@ watch(pageConfig, (newValue, oldValue) => {
 
   renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
 });
-
-
-// 重置新增抽屉
-const closeAddComp = () => {
-  console.log(" closeAddComp  ")
-  openAdd.value = false;
-  renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
-}
 
 
 // 渲染表格数据
@@ -173,9 +149,7 @@ renderTableList(pageConfig.value.current, pageConfig.value.pageSize);
     color: #108ee9;
   }
 
-  .editable-add-btn {
-    margin-bottom: 8px;
-  }
+
 }
 
 .editable-cell:hover .editable-cell-icon {

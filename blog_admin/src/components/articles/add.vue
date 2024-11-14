@@ -68,9 +68,9 @@ const onSubmit = () => {
   formRef.value
     .validate()
     .then(async () => {
-      console.log(" form data", formState)
+    
+      formState.status = Number(formState.status)
       let data = await ApiArticlesAdd(formState);
-      console.log(" resp data", data.data)
       if (data.code === 0) {
         message.success('success');
       } else {

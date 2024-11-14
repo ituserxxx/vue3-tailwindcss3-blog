@@ -98,7 +98,7 @@ const onSubmit = () => {
       let data = await ApiUserUpdate(formState);
       console.log(" resp data", data.data)
       if (data.code === 0) {
-        console.log("修改succ ", data.data)
+        message.success('success');
       } else {
         message.error(data.data.msg);
       }

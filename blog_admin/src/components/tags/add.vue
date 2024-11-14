@@ -49,7 +49,7 @@ const onSubmit = () => {
       if (data.code === 0) {
         message.success('success');
       } else {
-        message.error(data.data.msg);
+        message.error(data.msg);
       }
     })
     .catch(error => {
