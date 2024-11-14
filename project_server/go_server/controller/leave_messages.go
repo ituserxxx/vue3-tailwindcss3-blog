@@ -5,7 +5,6 @@ import (
 	Config "go_server/config"
 	"go_server/dto"
 	"go_server/model"
-	"time"
 )
 
 type leaveMessages struct {
@@ -31,22 +30,6 @@ func (leaveMessages) List(c *gin.Context) {
 	dto.ReturnRes.Succ(c, data)
 }
 
-func (leaveMessages) Add(c *gin.Context) {
-	var params dto.LeaveMessagesAddReq
-	if err := c.ShouldBind(&params); err != nil {
-		dto.ReturnRes.Err(c, 10001, err.Error())
-		return
-	}
-	var newRecord = model.LeaveMessages{
-		Name:       params.Name,
-		Content:    params.Content,
-		CreateTime: time.Now(),
-		IP:         nil,
-		IPAddr:     nil,
-	}
-	Config.Dao.Model(model.LeaveMessages{}).Create(&newRecord)
-	dto.ReturnRes.Succ(c, newRecord.ID)
-}
 func (leaveMessages) Delete(c *gin.Context) {
 	var params dto.IdReq
 	if err := c.ShouldBind(&params); err != nil {

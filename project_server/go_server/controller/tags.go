@@ -22,10 +22,12 @@ func (tags) List(c *gin.Context) {
 		List:  make([]model.Tags, 0),
 		Total: 0,
 	}
-	Config.Dao.Model(model.Tags{}).
-		Offset((params.Page - 1) * params.PageSize).
-		Limit(params.PageSize).
-		Scan(data.List)
+
+	dbt := Config.Dao.Model(model.Tags{})
+	if params.Page > 0 {
+		dbt = dbt.Offset((params.Page - 1) * params.PageSize).Limit(params.PageSize)
+	}
+	dbt.Order("id DESC").Scan(&data.List)
 	Config.Dao.Model(model.Tags{}).Count(&data.Total)
 	dto.ReturnRes.Succ(c, data)
 }

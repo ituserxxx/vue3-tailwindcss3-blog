@@ -14,7 +14,7 @@ func TestDBTest(t *testing.T) {
 	if err != nil {
 		log.Fatal("Error loading .env file", err)
 	}
-	Config.Init()
+	Config.RunModuleServer()
 	var uInfo *model.Users
 	Config.Dao.Model(model.Users{}).
 		Where("name=?", "xxx3").

@@ -5,6 +5,7 @@ import (
 	Config "go_server/config"
 	"go_server/dto"
 	"go_server/model"
+	"time"
 )
 
 type blog struct {
@@ -20,7 +21,7 @@ func (blog) ArticlesList(c *gin.Context) {
 		return
 	}
 	var data = &dto.BlogArticleListResp{}
-	db := Config.Dao.Model(model.Articles{})
+	db := Config.Dao.Model(model.Articles{}).Where("status=1")
 
 	if params.TagId > 0 {
 		db = db.Joins("left join article_tag_rela as atr on atr.article_id=articles.id").
@@ -48,7 +49,6 @@ func (blog) ArticlesDetail(c *gin.Context) {
 	Config.Dao.Model(model.ArticleTagRela{}).Select("tag_id").Where("id=?", params.ID).Scan(&data.TagsList)
 	dto.ReturnRes.Succ(c, data)
 }
-
 func (blog) TagsList(c *gin.Context) {
 	var data dto.BlogTagsListResp
 	Config.Dao.Model(model.Tags{}).Scan(&data.List)
@@ -71,9 +71,18 @@ func (blog) LeaveMessagesList(c *gin.Context) {
 
 }
 func (blog) LeaveMessagesAdd(c *gin.Context) {
-	var params dto.ArticleAddReq
+	var params dto.LeaveMessagesAddReq
 	if err := c.ShouldBind(&params); err != nil {
 		dto.ReturnRes.Err(c, 10001, err.Error())
 		return
 	}
+	var newRecord = model.LeaveMessages{
+		Name:       params.Name,
+		Content:    params.Content,
+		CreateTime: time.Now(),
+		IP:         nil,
+		IPAddr:     nil,
+	}
+	Config.Dao.Model(model.LeaveMessages{}).Create(&newRecord)
+	dto.ReturnRes.Succ(c, newRecord.ID)
 }

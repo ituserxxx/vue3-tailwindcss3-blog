@@ -146,14 +146,14 @@ func (articles) List(c *gin.Context) {
 		dto.ReturnRes.Err(c, 10001, err.Error())
 		return
 	}
-	var data = &dto.ArticlesListResp{
+	var data = dto.ArticlesListResp{
 		List: make([]model.Articles, 0),
 	}
 	Config.Dao.Model(model.Articles{}).
 		Offset((params.Page - 1) * params.PageSize).
 		Limit(params.PageSize).
 		Order("id desc").
-		Scan(data.List)
+		Scan(&data.List)
 	Config.Dao.Model(model.Articles{}).Count(&data.Total)
 	dto.ReturnRes.Succ(c, data)
 }
@@ -169,12 +169,11 @@ func (articles) Delete(c *gin.Context) {
 		if err != nil {
 			return err
 		}
-		err = tx.Unscoped().Where("article_id=>", params.ID).Delete(model.ArticleTagRela{}).Error
+		err = tx.Unscoped().Where("article_id=?", params.ID).Delete(model.ArticleTagRela{}).Error
 		if err != nil {
 			return err
 		}
 		// 返回 nil 提交事务
-
 		return nil
 	})
 	if err != nil {

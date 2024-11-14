@@ -60,6 +60,21 @@ func (users) Add(c *gin.Context) {
 	dto.ReturnRes.Succ(c, newRecord.ID)
 }
 
+func (users) Update(c *gin.Context) {
+	var params dto.UsersUpdateReq
+	if err := c.ShouldBind(&params); err != nil {
+		dto.ReturnRes.Err(c, 10001, err.Error())
+		return
+	}
+
+	Config.Dao.Model(model.Users{}).Updates(model.Users{
+		ID:     params.Id,
+		Name:   params.Name,
+		Passwd: params.Passwd,
+	})
+	dto.ReturnRes.Succ(c, "")
+}
+
 func (users) Info(c *gin.Context) {
 	var params dto.IdReq
 	if err := c.ShouldBind(&params); err != nil {
@@ -103,7 +118,7 @@ func (users) List(c *gin.Context) {
 		Offset((params.Page - 1) * params.PageSize).
 		Limit(params.PageSize).
 		Order("id desc").
-		Scan(data.List)
+		Scan(&data.List)
 	Config.Dao.Model(model.Users{}).Count(&data.Total)
 	dto.ReturnRes.Succ(c, data)
 }
