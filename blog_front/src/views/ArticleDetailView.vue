@@ -37,7 +37,7 @@
                     <!-- content -->
                     <MdPreview :modelValue="ViewData.content" />
                     <!-- tagsList -->
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2" v-if="ViewData.tagsList.length > 0">
                         <a v-for="(tag, index) in ViewData.tagsList" :key="index" :href="`/tag/${tag.id}`"
                             class="flex items-center text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
                             <svg class="text-indigo-600" fill="currentColor" height="16px" aria-hidden="true" role="img"
