@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	Config "go_server/config"
 	"go_server/dto"
@@ -20,6 +21,7 @@ func (blog) ArticlesList(c *gin.Context) {
 		dto.ReturnRes.Err(c, 10001, err.Error())
 		return
 	}
+	fmt.Printf("----\n %#v \n", params)
 	var data = &dto.BlogArticleListResp{}
 	db := Config.Dao.Model(model.Articles{}).Where("status=1")
 
@@ -43,10 +45,13 @@ func (blog) ArticlesDetail(c *gin.Context) {
 		return
 	}
 	var data = &dto.BlogArticlesDetailResp{
-		TagsList: make([]int, 0),
+		TagsList: make([]model.Tags, 0),
 	}
 	Config.Dao.Model(model.Articles{}).Where("id=?", params.ID).Scan(&data)
-	Config.Dao.Model(model.ArticleTagRela{}).Select("tag_id").Where("id=?", params.ID).Scan(&data.TagsList)
+	Config.Dao.Model(model.Tags{}).
+		Where("id in (?)", Config.Dao.Model(model.ArticleTagRela{}).Select("tag_id").Where("id=?", params.ID)).
+		Scan(&data.TagsList)
+
 	dto.ReturnRes.Succ(c, data)
 }
 func (blog) TagsList(c *gin.Context) {

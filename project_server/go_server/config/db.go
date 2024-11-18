@@ -1,7 +1,6 @@
 package Config
 
 import (
-	"go_server/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -40,12 +39,12 @@ func DBInit() {
 	Dao = openDb
 	//autoMigrate(openDb)
 }
-func autoMigrate(db *gorm.DB) {
-	_ = db.AutoMigrate(
-		model.Articles{},
-		model.Tags{},
-		model.ArticleTagRela{},
-		model.Users{},
-		model.LeaveMessages{},
-	)
-}
+// func autoMigrate(db *gorm.DB) {
+// 	_ = db.AutoMigrate(
+// 		model.Articles{},
+// 		model.Tags{},
+// 		model.ArticleTagRela{},
+// 		model.Users{},
+// 		model.LeaveMessages{},
+// 	)
+// }
