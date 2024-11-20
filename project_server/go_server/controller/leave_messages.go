@@ -25,7 +25,7 @@ func (leaveMessages) List(c *gin.Context) {
 		Offset((params.Page - 1) * params.PageSize).
 		Limit(params.PageSize).
 		Order("id desc").
-		Scan(data.List)
+		Scan(&data.List)
 	Config.Dao.Model(model.LeaveMessages{}).Count(&data.Total)
 	dto.ReturnRes.Succ(c, data)
 }

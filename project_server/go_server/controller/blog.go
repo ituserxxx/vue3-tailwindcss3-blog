@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	Config "go_server/config"
 	"go_server/dto"
@@ -21,7 +20,6 @@ func (blog) ArticlesList(c *gin.Context) {
 		dto.ReturnRes.Err(c, 10001, err.Error())
 		return
 	}
-	fmt.Printf("----\n %#v \n", params)
 	var data = &dto.BlogArticleListResp{}
 	db := Config.Dao.Model(model.Articles{}).Where("status=1")
 
