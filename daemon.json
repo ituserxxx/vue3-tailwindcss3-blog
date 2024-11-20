@@ -1,0 +1,15 @@
+{
+    "registry-mirrors": [
+        "https://docker.996.ninja",
+        "https://quay.996.ninja",
+        "https://k8s.996.ninja",
+        "https://k8s-gcr.996.ninja",
+        "https://ghcr.996.ninja",
+        "https://cloudsmith.996.ninja",
+        "docker.1panel.live",
+        "docker.nastool.de",
+        "hub.littlediary.cn",
+        "docker.hpcloud.cloud",
+        "docker.registry.cyou"
+    ]
+}
