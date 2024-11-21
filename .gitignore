@@ -24,3 +24,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+deploy/mysql
+deploy/meilisearch
