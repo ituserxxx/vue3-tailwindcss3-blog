@@ -34,3 +34,13 @@ services:
       - PMA_HOST=blog_mysql
     depends_on:
       - blog_mysql
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: blog_meilisearch_cn
+    ports:
+      - "7700:7700"
+    volumes:
+      - ./meilisearch/data.ms:/data.ms
+    environment:
+      - MEILI_HTTP_ADMIN_ENABLED=true
+      - MEILI_MASTER_KEY=meilisearch_master_key  
