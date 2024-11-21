@@ -49,11 +49,18 @@
       </div>
     </div>
   </div>
-  <!-- 弹窗 -->
-  <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+ <!-- 弹窗 -->
+ <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded shadow-lg w-80">
       <h3 class="text-xl font-semibold mb-4">搜索结果</h3>
-      <p>{{ query }} 的搜索结果在这里...</p>
+      
+      <!-- 搜索结果列表 -->
+      <ul>
+        <li v-for="(item, index) in searchResults" :key="index" class="border-b border-gray-300 py-2">
+          {{ item }}
+        </li>
+      </ul>
+
       <button @click="closeModal" class="mt-4 py-2 px-4 bg-slate-800 text-white rounded">关闭</button>
     </div>
   </div>
@@ -72,6 +79,15 @@ const currentBgColor = ref(window.location.pathname);
 const searchInput = ref("")
 const showModal = ref(false)
 showModal.value = false
+
+const searchResults = ref(false)
+searchResults.value = [
+  "首页",
+  "首页",
+  "首页",
+  "首页",
+  "首页",
+]
 
 function updatePage(href) {
   currentBgColor.value = href;
