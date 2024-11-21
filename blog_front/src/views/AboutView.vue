@@ -16,12 +16,15 @@
             </h2>
 
             <p>
-              Donec porttitor, enim ut dapibus lobortis, lectus sem tincidunt dui, eget ornare lectus ex non
-              libero. Nam rhoncus diam ultrices porttitor laoreet. Ut mollis fermentum ex, vel viverra lorem
-              volutpat sodales. In ornare porttitor odio sit amet laoreet. Sed laoreet, nulla a posuere
-              ultrices, purus nulla tristique turpis, hendrerit rutrum augue quam ut est. Fusce malesuada
-              posuere libero, vitae dapibus eros facilisis euismod. Sed sed lobortis justo, ut tincidunt
-              velit. Mauris in maximus eros.
+              我是一名专注于后端开发的 Go 语言工程师，拥有多年的开发经验。
+
+在技术方面，我对 Go 语言有着深入的理解和熟练的运用，能够高效地编写高质量、可维护的代码。熟悉常见的后端框架，如 Gin 框架，能够快速搭建稳定可靠的服务架构。在数据库操作上，精通 MySQL 数据库的设计、优化和管理，能够保证数据的安全和高效存储。
+
+工作中，我注重团队协作，善于与同事沟通交流，能够快速理解项目需求并提供有效的技术解决方案。对于问题的排查和解决，我有着严谨的逻辑思维和丰富的经验，能够迅速定位并修复线上故障。
+
+我对新技术充满热情，不断学习和探索前沿的技术理念，致力于提升自己的技术水平，为项目带来更多创新和价值。
+
+希望我的专业能力和积极态度能够为团队的发展贡献力量
             </p>
           </div>
         </main>
