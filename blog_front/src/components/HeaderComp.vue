@@ -32,10 +32,10 @@
 
       <div class="w-full max-w-sm min-w-[200px]">
         <div class="relative">
-          <input
+          <input v-model="searchInput"
             class="w-full pl-3 h-10 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
             placeholder="You want to ..." />
-          <button
+          <button @click="handleSearch"
             class="absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center bg-slate-800 rounded hover:bg-slate-700"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2">
@@ -49,7 +49,14 @@
       </div>
     </div>
   </div>
-
+  <!-- 弹窗 -->
+  <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h3 class="text-xl font-semibold mb-4">搜索结果</h3>
+      <p>{{ query }} 的搜索结果在这里...</p>
+      <button @click="closeModal" class="mt-4 py-2 px-4 bg-slate-800 text-white rounded">关闭</button>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -62,9 +69,19 @@ const navigation = [
   { name: '关于', href: '/about' },
 ];
 const currentBgColor = ref(window.location.pathname);
+const searchInput = ref("")
+const showModal = ref(false)
+showModal.value = false
 
 function updatePage(href) {
   currentBgColor.value = href;
+}
+const handleSearch = async () => {
+  console.log(searchInput.value)
+  showModal.value = true
+}
+const closeModal = async () => {
+  showModal.value = false
 }
 </script>
 
