@@ -71,3 +71,4 @@ services:
       - MYSQL_PASSWORD=filerun
     volumes:
       - ./filerun/db-data:/var/lib/mysql
+
