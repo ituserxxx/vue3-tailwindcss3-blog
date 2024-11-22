@@ -42,7 +42,7 @@
             </p>
 
             <p class="text-sm text-gray-600 dark:text-gray-400">
-              <time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ leaveMessage.createTime }}</time>
+              <time pubdate datetime=""  >{{ leaveMessage.createTime }}</time>
             </p>
           </div>
         </footer>
@@ -122,7 +122,7 @@ const handleCommit = async () => {
       id: data.id,
       name: data.name,
       content: data.content,
-      date: data.createTime,
+      createTime: data.createTime,
     });
   } catch (error) {
     console.error('Error fetching the list:', error);
