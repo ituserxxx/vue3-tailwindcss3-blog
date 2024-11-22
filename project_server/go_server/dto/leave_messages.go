@@ -8,6 +8,9 @@ type LeaveMessagesResp struct {
 }
 
 type LeaveMessagesAddReq struct {
-	Name    string `json:"name" binding:"required"`
-	Content string `json:"content" binding:"required"`
+	Name    string `json:"name" from:"name" binding:"required"`
+	Content string `json:"content" from:"content" binding:"required"`
+}
+type SearchReq struct {
+	Content string `json:"content"`
 }

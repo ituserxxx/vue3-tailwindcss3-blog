@@ -89,3 +89,12 @@ func (blog) LeaveMessagesAdd(c *gin.Context) {
 	Config.Dao.Model(model.LeaveMessages{}).Create(&newRecord)
 	dto.ReturnRes.Succ(c, newRecord.ID)
 }
+func (blog) Search(c *gin.Context) {
+	var params dto.SearchReq
+	if err := c.ShouldBind(&params); err != nil {
+		dto.ReturnRes.Err(c, 10001, err.Error())
+		return
+	}
+
+	dto.ReturnRes.Succ(c, "还在开发中啊~~~")
+}

@@ -68,6 +68,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { searchApi } from '../api/blog';
 const navigation = [
   { name: '首页', href: '/' },
   { name: '留言板', href: '/leaveMessage' },
@@ -94,6 +95,15 @@ function updatePage(href) {
 }
 const handleSearch = async () => {
   console.log(searchInput.value)
+  let data = await searchApi({
+    content: searchInput.value,
+  });
+  console.log(data);
+  if (data.code > 0) {
+    console.error('Error le');
+    return
+  }
+  searchResults.value = data.data
   showModal.value = true
 }
 const closeModal = async () => {

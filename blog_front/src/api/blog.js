@@ -18,3 +18,7 @@ export function leaveMessageListApi (data) {
 export function leaveMessageAddApi (data) {
     return http.post('/leaveMessages/add',data)
 }
+
+export function searchApi (data) {
+    return http.post('/search',data)
+}
