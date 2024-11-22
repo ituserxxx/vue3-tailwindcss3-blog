@@ -27,3 +27,4 @@ TestResults.xml
 
 deploy/mysql
 deploy/meilisearch
+deploy/filerun
