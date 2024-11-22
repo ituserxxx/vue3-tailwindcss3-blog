@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest  # 使用 Jellyfin 最新的官方镜像
+    container_name: jellyfin
+    ports:
+      - "8096:8096"  # 映射容器的 8096 端口到主机
+    volumes:
+      - ./jellyfin/config:/config  # 配置文件
+      - ./jellyfin/data:/data      # 媒体文件存储路径
+      - ./jellyfin/cache:/cache    # 缓存目录
+    environment:
+      - PUID=1000  # 设置容器的用户ID
+      - PGID=1000  # 设置容器的组ID
+    restart: unless-stopped  # 容器在崩溃后自动重启，除非手动停止
+    # networks:
+    #   - jellyfin_network  # 指定容器使用的网络（可选）
+    # devices:
+    #   - "/dev/dri:/dev/dri"  # 如果启用了硬件加速，挂载硬件设备
+
+# networks:
+#   jellyfin_network:
+#     driver: bridge
+

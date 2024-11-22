@@ -24,3 +24,9 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+deploy/mysql
+deploy/meilisearch
+deploy/jellyfin
+deploy/emby
+deploy/filerun
