@@ -54,7 +54,7 @@ func (users) Add(c *gin.Context) {
 		Name:       params.Username,
 		Passwd:     params.Passwd,
 		Status:     1,
-		CreateTime: time.Now(),
+		CreateTime: time.Now().Format("2006-01-02 15:04:05"),
 	}
 	Config.Dao.Model(model.Users{}).Create(&newRecord)
 	dto.ReturnRes.Succ(c, newRecord.ID)

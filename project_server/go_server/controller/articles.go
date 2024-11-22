@@ -25,7 +25,7 @@ func (articles) Add(c *gin.Context) {
 		var recode = model.Articles{
 			Title:      params.Title,
 			Content:    params.Content,
-			CreateTime: time.Now(),
+			CreateTime: time.Now().Format("2006-01-02 15:04:05"),
 			Status:     params.Status,
 		}
 		err := tx.Model(model.Articles{}).Create(&recode).Error
@@ -74,7 +74,7 @@ func (articles) Update(c *gin.Context) {
 		var recode = model.Articles{
 			Title:      params.Title,
 			Content:    params.Content,
-			CreateTime: time.Now(),
+			CreateTime: time.Now().Format("2006-01-02 15:04:05"),
 			Status:     params.Status,
 		}
 

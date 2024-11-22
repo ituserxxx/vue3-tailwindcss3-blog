@@ -2,7 +2,6 @@ package dto
 
 import (
 	"go_server/model"
-	"time"
 )
 
 type ArticleAddReq struct {
@@ -12,13 +11,13 @@ type ArticleAddReq struct {
 	TagsId  []uint `json:"tags_id"`
 }
 type ArticleUpdateReq struct {
-	Id         uint      `json:"id" binding:"required"`
-	CreateTime time.Time `json:"createTime" binding:"required"`
-	UpdateTime time.Time `json:"updateTime"`
-	Title      string    `json:"title"  binding:"required"`
-	Content    string    `json:"content"  binding:"required"`
-	Status     int       `json:"status"  binding:"required"`
-	TagsId     []uint    `json:"tags_id"`
+	Id         uint   `json:"id" binding:"required"`
+	CreateTime string `json:"createTime" binding:"required"`
+	UpdateTime string `json:"updateTime"`
+	Title      string `json:"title"  binding:"required"`
+	Content    string `json:"content"  binding:"required"`
+	Status     int    `json:"status"  binding:"required"`
+	TagsId     []uint `json:"tags_id"`
 }
 type ArticlesListResp struct {
 	List  []model.Articles `json:"list"`
