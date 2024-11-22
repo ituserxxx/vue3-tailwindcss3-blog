@@ -11,7 +11,6 @@ import (
 )
 
 func main() {
-	r := gin.Default()
 	// 加载配置文件
 	err := godotenv.Load(".env") // 加载.env文件
 	if err != nil {
@@ -20,6 +19,8 @@ func main() {
 	// 加载组件
 	Config.RunModuleServer()
 
+	r := gin.Default()
+	gin.SetMode(os.Getenv("GIN_MODE"))
 	// 加载路由
 	router.Init(r)
 

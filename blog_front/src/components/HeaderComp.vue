@@ -49,11 +49,11 @@
       </div>
     </div>
   </div>
- <!-- 弹窗 -->
- <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <!-- 弹窗 -->
+  <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded shadow-lg w-80">
       <h3 class="text-xl font-semibold mb-4">搜索结果</h3>
-      
+
       <!-- 搜索结果列表 -->
       <ul>
         <li v-for="(item, index) in searchResults" :key="index" class="border-b border-gray-300 py-2">
