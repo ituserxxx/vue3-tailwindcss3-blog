@@ -27,4 +27,6 @@ TestResults.xml
 
 deploy/mysql
 deploy/meilisearch
+deploy/jellyfin
+deploy/emby
 deploy/filerun

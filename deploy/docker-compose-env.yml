@@ -45,7 +45,7 @@ services:
       - MEILI_HTTP_ADMIN_ENABLED=true
       - MEILI_MASTER_KEY=meilisearch_master_key  
   filerun:
-      image: afian/filerun
+      image: filerun/filerun:8.1
       container_name: blog_filerun_cn
       restart: on-failure
       ports:

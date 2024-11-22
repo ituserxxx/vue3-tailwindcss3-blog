@@ -7,14 +7,13 @@ DIR="$PWD/mysql"
 DIR="$PWD/meilisearch"
 [ -d "$DIR" ] || mkdir -p "$DIR" 
 
-DIR="$PWD/filerun/filerun-data"
-[ -d "$DIR" ] || mkdir -p "$DIR"
 
-DIR="$PWD/filerun/filerun-files"
+DIR="$PWD/emby/media"
 [ -d "$DIR" ] || mkdir -p "$DIR" 
 
-DIR="$PWD/filerun/db-data"
+DIR="$PWD/jellyfin"
 [ -d "$DIR" ] || mkdir -p "$DIR" 
 
-docker compose -f $PWD/docker-compose-env.yml up -d
+# docker compose -f $PWD/docker-compose-env.yml up -d
+docker compose -f $PWD/jellyfin.yml up 
 

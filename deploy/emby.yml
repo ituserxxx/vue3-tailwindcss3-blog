@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  emby:
+    image: emby/embyserver:latest  # 使用最新的 Emby 官方镜像
+    container_name: emby-server
+    restart: unless-stopped  # 容器崩溃或重启时自动重启
+    environment:
+      - UID=1000  # 设置用户的UID（可以根据系统设置来修改）
+      - GID=1000  # 设置用户的GID（可以根据系统设置来修改）
+      - EMBY_DATA=/mnt/emby  # 设置Emby的数据目录路径
+    volumes:
+      - ./emby/config:/config  # 映射 Emby 配置文件
+      - ./emby/media:/mnt/emby/media  # 映射媒体文件存储
+    ports:
+      - "8096:8096"  # Emby Web 界面端口
+      - "8920:8920"  # 如果你启用了 HTTPS，可以开放此端口
+
