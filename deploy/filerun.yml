@@ -1,0 +1,30 @@
+version: '3'
+services:
+  filerun:
+      image: filerun/filerun:8.1
+      container_name: blog_filerun_cn
+      restart: on-failure
+      ports:
+        - "6004:80"
+      volumes:
+        - ./filerun/filerun-data:/var/www/html
+        - ./filerun/filerun-files:/user-files
+      environment:
+        - MYSQL_PASSWORD=filerun
+        - MYSQL_DATABASE=filerun
+        - MYSQL_USER=filerun
+        - MYSQL_ROOT_PASSWORD=root
+      depends_on:
+        - filerun_db
+
+  filerun_db:
+    image: mysql:5.7
+    container_name: blog_filerun_db_cn
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=filerun
+      - MYSQL_USER=filerun
+      - MYSQL_PASSWORD=filerun
+    volumes:
+      - ./filerun/db-data:/var/lib/mysql
+

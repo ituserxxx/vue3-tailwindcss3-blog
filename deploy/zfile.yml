@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+    zfile:
+        image: swr.cn-north-1.myhuaweicloud.com/zfile-dev/zfile:latest
+        container_name: zfile
+        restart: always
+        ports:
+            - "8009:8080"
+        volumes:
+            - ./zfile/db:/root/.zfile-v4/db
+            - ./zfile/logs:/root/.zfile-v4/logs
+            - ./zfile/file:/data/file

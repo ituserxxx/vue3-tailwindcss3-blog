@@ -14,12 +14,4 @@ services:
       - PUID=1000  # 设置容器的用户ID
       - PGID=1000  # 设置容器的组ID
     restart: unless-stopped  # 容器在崩溃后自动重启，除非手动停止
-    # networks:
-    #   - jellyfin_network  # 指定容器使用的网络（可选）
-    # devices:
-    #   - "/dev/dri:/dev/dri"  # 如果启用了硬件加速，挂载硬件设备
-
-# networks:
-#   jellyfin_network:
-#     driver: bridge
-
+ 
