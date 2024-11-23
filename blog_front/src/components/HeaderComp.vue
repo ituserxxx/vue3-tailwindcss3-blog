@@ -75,6 +75,7 @@ const navigation = [
   { name: '标签', href: '/tag' },
   { name: '相册', href: '/shoot' },
   { name: '关于', href: '/about' },
+  { name: 'demo', href: '/demo' },
 ];
 const currentBgColor = ref(window.location.pathname);
 const searchInput = ref("")

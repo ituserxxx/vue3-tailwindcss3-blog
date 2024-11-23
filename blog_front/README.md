@@ -1,4 +1,13 @@
 # blog front
+
+templete
+```
+https://tailwindflex.com/
+
+
+```
+
+
 ## Project Setup
 
 ```sh

@@ -40,7 +40,7 @@ const router = createRouter({
     {
       path: '/demo',
       name: 'demo',
-      component: () => import('../views/LoginDemo.vue'),
+      component: () => import('../views/Timeline.vue'),
       props: true,
     }
   ]
