@@ -3,6 +3,8 @@
 templete
 ```
 https://tailwindflex.com/
+https://tailwindflex.com/search?q=about
+https://www.cnblogs.com/guoapeng/p/17884825.html
 
 
 ```
@@ -31,3 +33,5 @@ npm run build
 ```
  node ../project_server/mock.js 
 ```
+
+
