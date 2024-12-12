@@ -22,3 +22,7 @@ export function leaveMessageAddApi (data) {
 export function searchApi (data) {
     return http.post('/search',data)
 }
+
+export function shootListApi (data) {
+    return http.post('/shoots/list',data)
+}

@@ -71,8 +71,8 @@ import { ref } from 'vue';
 import { searchApi } from '../api/blog';
 const navigation = [
   { name: '首页', href: '/' },
-  { name: '留言板', href: '/leaveMessage' },
   { name: '标签', href: '/tag' },
+  { name: '留言板', href: '/leaveMessage' },
   { name: '相册', href: '/shoot' },
   { name: '关于', href: '/about' },
   { name: 'demo', href: '/demo' },
