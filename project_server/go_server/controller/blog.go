@@ -97,3 +97,36 @@ func (blog) Search(c *gin.Context) {
 
 	dto.ReturnRes.Succ(c, "还在开发中啊~~~")
 }
+func (blog) ShootsList(c *gin.Context) {
+	var params dto.PageReq
+	if err := c.ShouldBind(&params); err != nil {
+		dto.ReturnRes.Err(c, 10001, err.Error())
+		return
+	}
+	var data = make([]model.Shoots, 0)
+	data = append(data, model.Shoots{
+		ID:         0,
+		Alt:        "aa",
+		ImgUrl:     "https://images.unsplash.com/photo-1432462770865-65b70566d673?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80",
+		CreateTime: "",
+	})
+	data = append(data, model.Shoots{
+		ID:         0,
+		Alt:        "",
+		ImgUrl:     "https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80",
+		CreateTime: "",
+	})
+	data = append(data, model.Shoots{
+		ID:         0,
+		Alt:        "",
+		ImgUrl:     "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2940&amp;q=80",
+		CreateTime: "",
+	})
+	data = append(data, model.Shoots{
+		ID:         0,
+		Alt:        "",
+		ImgUrl:     "https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80",
+		CreateTime: "",
+	})
+	dto.ReturnRes.Succ(c, data)
+}

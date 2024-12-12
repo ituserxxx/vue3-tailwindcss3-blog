@@ -15,6 +15,7 @@ func Init(r *gin.Engine) {
 	blog.POST("/leaveMessages/list", controller.Blog.LeaveMessagesList)
 	blog.POST("/leaveMessages/add", controller.Blog.LeaveMessagesAdd)
 	blog.POST("/search", controller.Blog.Search)
+	blog.POST("/shoots/list", controller.Blog.ShootsList)
 
 	admin := r.Group("admin")
 
